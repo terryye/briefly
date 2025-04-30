@@ -53,9 +53,9 @@ export const authConfig = {
         }),
     },
     theme: {
-        colorScheme: "auto", // "auto" | "dark" | "light"
+        colorScheme: "light", // "auto" | "dark" | "light"
         //brandColor: "", // Hex color code
-        logo: "http://localhost:3000/images/logo.png", // Absolute URL to image
+        logo: process.env.SITE_LOGO, // Absolute URL to image
         //buttonText: "", // Hex color code
     },
 } satisfies NextAuthConfig;
