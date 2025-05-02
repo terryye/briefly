@@ -1,15 +1,12 @@
-import { api, HydrateClient } from "@/trpc/server";
-import { auth } from "@/server/auth";
+import { HydrateClient } from "@/trpc/server";
 import Icons from "./components/ui/Icons";
+import Image from "next/image";
 
 export default async function Home() {
-    const result = await api.test.foo({ test: "你好" });
-    const session = await auth();
-
     return (
         <HydrateClient>
             <div className="fixed right-6 bottom-60">
-                <button className="btn btn-primary btn-circle">Go</button>;
+                <button className="btn btn-primary btn-circle">Go</button>
             </div>
             <div className="flex flex-row p-6 border-b-1 border-zinc-200">
                 <div className="basis-2/3 text-2xl font-serif font-extrabold">
@@ -28,10 +25,11 @@ export default async function Home() {
                 <h1 className="text-2xl font-bold">
                     Waltz ousted as security adviser, Rubio to...
                 </h1>
-                <img
+                <Image
+                    alt="Trump and Waltz"
                     className="py-4"
                     src="https://media.cnn.com/api/v1/images/stellar/prod/c-gettyimages-2203986531.jpg?c=original"
-                ></img>
+                />
                 <p className="text-base">
                     President Donald Trump announced Thursday that he would
                     nominate national security adviser Mike Waltz to serve as UN

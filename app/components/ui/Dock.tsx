@@ -4,14 +4,13 @@ import React from "react";
 import { useRouter } from "next/navigation";
 import { usePathname } from "next/navigation";
 
-interface DockProps {}
 const Dock = () => {
     const router = useRouter();
     const pathname = usePathname();
-    let linkToday = "/";
-    let linkHistory = "/history";
-    let linkProfile = "/profile";
-    let items = [
+    const linkToday = "/";
+    const linkHistory = "/history";
+    const linkProfile = "/profile";
+    const items = [
         {
             name: "Today",
             link: linkToday,

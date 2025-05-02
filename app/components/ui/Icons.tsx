@@ -1,4 +1,4 @@
-let hot = (
+const hot = (
     <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 16 16"
@@ -13,7 +13,7 @@ let hot = (
     </svg>
 );
 
-let star = (
+const star = (
     <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 16 16"
@@ -28,7 +28,9 @@ let star = (
     </svg>
 );
 
-export default {
+const Icons = {
     hot,
     star,
 };
+
+export default Icons;
