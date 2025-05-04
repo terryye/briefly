@@ -1,12 +1,12 @@
 "use client";
 //https://daypicker.dev/
 
-import React, { useState } from "react";
+import React from "react";
 import { DayPicker } from "react-day-picker";
 
 const Calendar = () => {
     //const [dates] = useState<Date[] | undefined>();
-    let dates: Date[] = [];
+    const dates: Date[] = [];
     return (
         <DayPicker
             className="react-day-picker"
