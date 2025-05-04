@@ -26,9 +26,11 @@ export default async function Home() {
                     Waltz ousted as security adviser, Rubio to...
                 </h1>
                 <Image
+                    width={500}
+                    height={300}
                     alt="Trump and Waltz"
                     className="py-4"
-                    src="https://media.cnn.com/api/v1/images/stellar/prod/c-gettyimages-2203986531.jpg?c=original"
+                    src="https://media.cnn.com/api/v1/images/stellar/prod/c-gettyimages-2203986531.jpg"
                 />
                 <p className="text-base">
                     President Donald Trump announced Thursday that he would
