@@ -5,7 +5,8 @@ import React, { useState } from "react";
 import { DayPicker } from "react-day-picker";
 
 const Calendar = () => {
-    const [dates, setDates] = useState<Date[] | undefined>();
+    //const [dates] = useState<Date[] | undefined>();
+    let dates: Date[] = [];
     return (
         <DayPicker
             className="react-day-picker"

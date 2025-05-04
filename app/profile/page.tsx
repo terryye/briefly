@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React, { use } from "react";
+import React from "react";
 import Calendar from "../components/ui/Calendar";
 import Icons from "../components/ui/Icons";
 
