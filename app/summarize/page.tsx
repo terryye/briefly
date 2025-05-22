@@ -1,6 +1,5 @@
 import { HydrateClient } from "@/trpc/server";
 import Icons from "@/app/components/ui/Icons";
-import Image from "next/image";
 
 export default async function Home() {
     return (
