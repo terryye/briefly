@@ -2,8 +2,12 @@ import Image from "next/image";
 import React from "react";
 import Calendar from "../components/ui/Calendar";
 import Icons from "../components/ui/Icons";
+import { auth } from "@/server/auth";
 
-const HistoryPage = () => {
+const HistoryPage = async () => {
+    const session = await auth();
+    console.log(session);
+
     return (
         <div>
             <div className="flex flex-row p-6 border-b-1 border-zinc-300">
@@ -18,14 +22,14 @@ const HistoryPage = () => {
                 <div className="avatar">
                     <div className="w-24 mask mask-squircle ">
                         <Image
-                            alt="Terry Ye"
+                            alt={session?.user.name || ""}
                             width={96}
                             height={96}
-                            src="https://img.daisyui.com/images/profile/demo/batperson@192.webp"
+                            src={session?.user.image || ""}
                         />
                     </div>
                 </div>
-                <span className="p-2 font-bold">Terry Ye</span>
+                <span className="p-2 font-bold">{session?.user.name}</span>
             </div>
             <div className="flex flex-row m-4 pb-4 border-b-1 border-zinc-300 ">
                 <div className="basis-2/3  font-serif font-extrabold">

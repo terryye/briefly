@@ -4,6 +4,7 @@ import {
     publicProcedure,
 } from "@/server/api/trpc";
 import { z } from "zod";
+import { auth } from "@/server/auth";
 
 export const appRouter = createTRPCRouter({
     test: createTRPCRouter({
@@ -14,6 +15,12 @@ export const appRouter = createTRPCRouter({
                     input,
                 };
             }),
+    }),
+    user: createTRPCRouter({
+        info: publicProcedure.query(async () => {
+            const session = await auth();
+            return session?.user;
+        }),
     }),
 });
 
