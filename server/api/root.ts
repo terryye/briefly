@@ -5,6 +5,8 @@ import {
 } from "@/server/api/trpc";
 import { z } from "zod";
 import { auth } from "@/server/auth";
+import articleRouter from "./article";
+import summaryRouter from "./summary";
 
 export const appRouter = createTRPCRouter({
     test: createTRPCRouter({
@@ -22,6 +24,8 @@ export const appRouter = createTRPCRouter({
             return session?.user;
         }),
     }),
+    article: articleRouter,
+    summary: summaryRouter,
 });
 
 export type AppRouter = typeof appRouter;
