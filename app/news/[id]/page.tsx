@@ -3,8 +3,10 @@ import Icons from "@/app/components/ui/Icons";
 import Image from "next/image";
 import Link from "next/link";
 
-export default async function NewsPage({ params }: { params: { id: string } }) {
-    const articleId = params.id;
+type Params = Promise<{ id: string }>;
+
+export default async function NewsPage({ params }: { params: Params }) {
+    const articleId = (await params).id;
 
     const article =
         articleId == "today"
