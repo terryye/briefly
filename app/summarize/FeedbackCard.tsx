@@ -1,8 +1,9 @@
+import { Feedback } from "@/server/openai";
 import { Summary } from "@/server/api/summary";
 
 const FeedbackCard = ({ summary }: { summary: Summary | null }) => {
     if (!summary) return null;
-    const feedback = summary.feedback;
+    const feedback = summary.feedback as Feedback;
 
     return (
         <div className="prose prose-invert max-w-none p-6">

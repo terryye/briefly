@@ -6,6 +6,7 @@ import { db, schema } from "../db";
 import { z } from "zod";
 
 const t_article = schema.article;
+export type Article = typeof t_article.$inferSelect;
 
 export default createTRPCRouter({
     latest: publicProcedure.query(async () => {
@@ -14,15 +15,15 @@ export default createTRPCRouter({
             .from(t_article)
             .orderBy(desc(t_article.date))
             .limit(1);
-        return result;
+        return result[0];
     }),
     view: publicProcedure
-        .input(z.object({ id: z.number() }))
+        .input(z.object({ articleId: z.string() }))
         .query(async ({ input }) => {
             const result = await db
                 .select()
                 .from(t_article)
-                .where(eq(t_article.id, input.id))
+                .where(eq(t_article.articleId, input.articleId))
                 .orderBy(desc(t_article.date))
                 .limit(1);
 

@@ -1,13 +1,9 @@
-import {
-    createTRPCRouter,
-    protectedProcedure,
-    publicProcedure,
-} from "@/server/api/trpc";
+import { createTRPCRouter, protectedProcedure } from "@/server/api/trpc";
 //import { format } from "date-fns";
 
-import { and, count, desc, eq } from "drizzle-orm";
-import { db, schema } from "../db";
+import { and, desc, eq, gte, inArray, lte } from "drizzle-orm";
 import { z } from "zod";
+import { db, schema } from "../db";
 import { askAI } from "../openai";
 
 const t_article = schema.article;
@@ -18,13 +14,15 @@ export default createTRPCRouter({
     submit: protectedProcedure
         .input(
             z.object({
-                articleId: z.number(),
+                articleId: z.string(),
+                summaryId: z.string().optional(),
                 post: z
                     .string()
                     .min(30, "Summary should have at least 30 characters"),
             })
         )
         .mutation(async ({ input, ctx }) => {
+            /*
             const countRes = await db
                 .select({ count: count() })
                 .from(t_summary)
@@ -40,12 +38,27 @@ export default createTRPCRouter({
                     "You can only submit 10 summaries for this article"
                 );
             }
-
-            // const { article_id, summary } = input;
+            */
+            /*
+            if (input.summaryId) {
+                const result = await db
+                    .select()
+                    .from(t_summary)
+                    .where(
+                        and(
+                            eq(t_summary.summaryId, input.summaryId),
+                            eq(t_summary.userId, ctx.session?.user.id)
+                        )
+                    );
+                if (result.length === 0) {
+                    throw new Error("You do not have access to this summary");
+                }
+            }
+            */
             const result = await db
                 .select()
                 .from(t_article)
-                .where(eq(t_article.id, input.articleId))
+                .where(eq(t_article.articleId, input.articleId))
                 .limit(1);
             const article = result[0];
 
@@ -62,39 +75,72 @@ export default createTRPCRouter({
                 feedback.paraphrasing.score;
 
             const summary = {
-                articleId: article.id,
+                articleId: article.articleId,
                 score: score,
                 post: input.post,
                 userId: ctx.session?.user.id,
                 feedback: feedback,
+                article_date: article.date,
             };
 
             const respond = await db
                 .insert(t_summary)
                 .values(summary)
+                .onConflictDoUpdate({
+                    target: [t_summary.articleId, t_summary.userId],
+                    set: summary,
+                })
                 .returning();
 
             return respond[0];
         }),
-    view: publicProcedure
-        .input(z.object({ id: z.number() }))
-        .query(async ({ input }) => {
+    view: protectedProcedure
+        .input(z.object({ summaryId: z.string() }))
+        .query(async ({ input, ctx }) => {
             const result = await db
                 .select()
-                .from(t_article)
-                .where(eq(t_article.id, input.id))
-                .orderBy(desc(t_article.date))
+                .from(t_summary)
+                .where(
+                    and(
+                        eq(t_summary.summaryId, input.summaryId),
+                        eq(t_summary.userId, ctx.session?.user.id)
+                    )
+                )
+                .orderBy(desc(t_summary.createAt))
                 .limit(1);
 
             return result[0];
         }),
-    list: publicProcedure.query(async () => {
-        const result = await db
-            .select()
-            .from(t_article)
-            .orderBy(desc(t_article.date))
-            .limit(100);
+    listByIds: protectedProcedure
+        .input(z.object({ articleIds: z.array(z.string()) }))
+        .query(async ({ input, ctx }) => {
+            const result = await db
+                .select()
+                .from(t_summary)
+                .where(
+                    and(
+                        inArray(t_summary.articleId, input.articleIds),
+                        eq(t_summary.userId, ctx.session.user.id)
+                    )
+                )
+                .orderBy(desc(t_summary.createAt))
+                .limit(100);
 
-        return result;
-    }),
+            return result;
+        }),
+    listByDateRange: protectedProcedure
+        .input(z.object({ startDate: z.date(), endDate: z.date() }))
+        .query(async ({ input, ctx }) => {
+            const result = await db
+                .select()
+                .from(t_summary)
+                .where(
+                    and(
+                        eq(t_summary.userId, ctx.session.user.id),
+                        gte(t_article.date, input.startDate.toISOString()),
+                        lte(t_article.date, input.endDate.toISOString())
+                    )
+                );
+            return result;
+        }),
 });

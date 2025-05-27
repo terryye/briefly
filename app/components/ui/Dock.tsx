@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation";
 const Dock = () => {
     const router = useRouter();
     const pathname = usePathname();
-    const linkToday = "/";
+    const linkToday = "/news/today";
     const linkHistory = "/history";
     const linkProfile = "/profile";
     const items = [

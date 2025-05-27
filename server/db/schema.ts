@@ -10,6 +10,7 @@ import {
     date,
     serial,
     jsonb,
+    uuid,
 } from "drizzle-orm/pg-core";
 import { type AdapterAccount } from "next-auth/adapters";
 
@@ -108,22 +109,21 @@ export const verificationTokens = createTable(
 
 export const article = createTable("article", {
     id: serial().primaryKey().notNull(),
+    articleId: uuid("article_id").defaultRandom().notNull(),
     title: varchar({ length: 255 }).notNull(),
     content: text().notNull(),
-    createTime: timestamp("create_time", {
-        withTimezone: true,
-        mode: "string",
-    }).defaultNow(),
+    createAt: timestamp("create_at", { mode: "string" }).defaultNow(),
     date: date().notNull(),
     poster: varchar({ length: 255 }).notNull(),
 });
 
 export const summary = createTable("summary", {
     id: serial().primaryKey().notNull(),
-    articleId: integer("article_id").notNull(),
+    summaryId: uuid("summary_id").defaultRandom().notNull(),
+    articleId: uuid("article_id").notNull(),
     score: integer().notNull(),
     post: text().notNull(),
     userId: varchar("user_id", { length: 255 }).notNull(),
-    createTime: timestamp("create_time", { mode: "string" }).defaultNow(),
+    createAt: timestamp("create_at", { mode: "string" }).defaultNow(),
     feedback: jsonb().notNull(),
 });
