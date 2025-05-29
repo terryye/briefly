@@ -3,7 +3,6 @@ import Icons from "./Icons";
 
 const Badge = async () => {
     const badge = await api.summary.badge();
-    console.log(badge);
     return (
         <>
             <div className="basis-1/3 flex flex-row justify-end">
