@@ -12,7 +12,9 @@ export default function ProfileCard({ session }: { session: Session | null }) {
                     Profile
                 </div>
                 <div className="basis-1/3 flex flex-row justify-end">
-                    <button className="btn btn-primary btn-xs">Edit</button>
+                    <button className="btn btn-primary btn-xs hidden">
+                        Edit
+                    </button>
                 </div>
             </div>
             <div className="flex flex-col items-center justify-center p-6 pt-8">

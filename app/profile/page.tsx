@@ -1,8 +1,8 @@
 import { auth } from "@/server/auth";
+import Badge from "../components/ui/badge";
 import Calendar from "../components/ui/Calendar";
-import Icons from "../components/ui/Icons";
-import ProfileCard from "./ProfileCard";
 import Signinout from "../components/ui/Signinout";
+import ProfileCard from "./ProfileCard";
 
 export default async function ProfilePage() {
     const session = await auth();
@@ -16,12 +16,7 @@ export default async function ProfilePage() {
                         Progress
                     </div>
                     <div className="basis-1/3 flex justify-end">
-                        <div className="badge badge-success mr-2 text-white">
-                            {Icons.hot} 20
-                        </div>
-                        <div className="badge badge-info  text-white">
-                            {Icons.star} 365
-                        </div>
+                        <Badge />
                     </div>
                 </div>
                 <div className="flex flex-col items-center justify-center">

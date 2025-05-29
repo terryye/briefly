@@ -1,6 +1,6 @@
 import { createTRPCRouter, protectedProcedure } from "@/server/api/trpc";
 
-import { and, desc, eq, gte, inArray, lte } from "drizzle-orm";
+import { and, count, desc, eq, gte, inArray, lte } from "drizzle-orm";
 import { z } from "zod";
 import { db, schema } from "../db";
 import { askAI } from "../openai";
@@ -148,4 +148,35 @@ export default createTRPCRouter({
                 );
             return result;
         }),
+    //get user's submission count for last last 31days and All time (according to articleDate)
+    badge: protectedProcedure.query(async ({ ctx }) => {
+        const result = await db
+            .select({
+                count: count(),
+            })
+            .from(t_summary)
+            .where(
+                and(
+                    eq(t_summary.userId, ctx.session.user.id),
+                    gte(
+                        t_summary.articleDate,
+                        format(
+                            new Date(Date.now() - 31 * 24 * 60 * 60 * 1000), //31 days ago
+                            "yyyy-MM-dd"
+                        )
+                    ),
+                    eq(t_summary.userId, ctx.session.user.id)
+                )
+            );
+        const result2 = await db
+            .select({
+                count: count(),
+            })
+            .from(t_summary)
+            .where(eq(t_summary.userId, ctx.session.user.id));
+        return {
+            last31days: result[0].count,
+            allTime: result2[0].count,
+        };
+    }),
 });

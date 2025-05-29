@@ -6,12 +6,12 @@ import SummaryForm from "./SummaryForm";
 export default async function PageSummarize({
     searchParams,
 }: {
-    searchParams: { [key: string]: string | string[] | undefined };
+    searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
-    const summaryId = searchParams.summary_id as string;
+    const summaryId = (await searchParams).summary_id as string;
     let summary: Summary | null = null;
     let article: Article | null = null;
-    let articleId: string | null = searchParams.article_id as string;
+    let articleId: string | null = (await searchParams).article_id as string;
 
     if (summaryId) {
         summary = await api.summary.view({ summaryId: summaryId });

@@ -2,11 +2,11 @@
 //https://daypicker.dev/
 import { api } from "@/trpc/react";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import {
+    DayPicker,
     NextMonthButton,
     NextMonthButtonProps,
-    DayPicker,
 } from "react-day-picker";
 
 const Calendar = () => {
