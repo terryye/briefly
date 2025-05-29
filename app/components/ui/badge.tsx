@@ -1,7 +1,12 @@
+import { auth } from "@/server/auth";
 import { api } from "@/trpc/server";
 import Icons from "./Icons";
 
 const Badge = async () => {
+    const session = await auth();
+    if (!session?.user) {
+        return null;
+    }
     const badge = await api.summary.badge();
     return (
         <>

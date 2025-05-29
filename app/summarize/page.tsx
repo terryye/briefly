@@ -1,6 +1,8 @@
 import { Article } from "@/server/api/article";
 import { Summary } from "@/server/api/summary";
+import { auth } from "@/server/auth";
 import { HydrateClient, api } from "@/trpc/server";
+import { redirect } from "next/navigation";
 import SummaryForm from "./SummaryForm";
 
 export default async function PageSummarize({
@@ -8,6 +10,10 @@ export default async function PageSummarize({
 }: {
     searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
+    const session = await auth();
+    if (!session) {
+        redirect(`/api/auth/signin`);
+    }
     const summaryId = (await searchParams).summary_id as string;
     let summary: Summary | null = null;
     let article: Article | null = null;
