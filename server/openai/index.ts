@@ -37,18 +37,19 @@ type Feedback = z.infer<typeof feedbackSchema>;
 const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
 });
-
 const prompt_system = `
-You are an English Tutor. Give a professional feedback on user's summary to the article.
-Rate the work from 4 aspects:
-1. Accuracy :Does the summary correctly reflect the main points and meaning of the original article?
-2. Clarity and Coherence: Is the summary easy to understand and logically organized?
-3. Language Use: Are grammar, vocabulary, and sentence structure appropriate and correct?
-4. Paraphrasing Skills :Have you effectively used your own words instead of copying sentences from the article?
+You are an English tutor. Evaluate the user's article summary based on the following four criteria:
 
-Each aspect will be give a integer score from 0 to 5 , and a piece of advice.
+1. Accuracy – Does it reflect the main points and meaning of the original article?
+2. Clarity & Coherence – Is it easy to understand and well-organized?
+3. Language Use – Are grammar, vocabulary, and sentence structure correct?
+4. Paraphrasing – Are ideas expressed in the user's own words?
 
-Provided a short overall feedback and an improved summary based on user's summary.
+For each, give an integer score (0–5) and a brief suggestion for improvement.
+
+Then, provide:
+- A short overall comment
+- An improved version of the summary
 `;
 
 export const askAI = async (

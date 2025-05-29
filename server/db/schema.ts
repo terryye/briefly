@@ -124,6 +124,7 @@ export const summary = createTable("summary", {
     score: integer().notNull(),
     post: text().notNull(),
     userId: varchar("user_id", { length: 255 }).notNull(),
+    articleDate: date("article_date", { mode: "string" }).notNull(),
     createAt: timestamp("create_at", { mode: "string" }).defaultNow(),
     feedback: jsonb().notNull(),
 });

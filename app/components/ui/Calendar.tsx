@@ -1,18 +1,63 @@
 "use client";
 //https://daypicker.dev/
+import { api } from "@/trpc/react";
 
-import React from "react";
-import { DayPicker } from "react-day-picker";
+import { useEffect, useMemo, useState } from "react";
+import {
+    NextMonthButton,
+    NextMonthButtonProps,
+    DayPicker,
+} from "react-day-picker";
 
 const Calendar = () => {
-    //const [dates] = useState<Date[] | undefined>();
-    const dates: Date[] = [];
+    const [month, setMonth] = useState(new Date());
+    const [booked, setBooked] = useState<Date[]>([]);
+
+    const monthStart = new Date(month.getFullYear(), month.getMonth(), 1);
+    const monthEnd = new Date(month.getFullYear(), month.getMonth() + 1, 0);
+
+    const { data } = api.summary.listByDateRange.useQuery({
+        startDate: monthStart,
+        endDate: monthEnd,
+    });
+
+    const dates = data?.map((d) => new Date(d.articleDate)) ?? [];
+    const CustomNextMonthBtn = (props: NextMonthButtonProps) => {
+        return <NextMonthButton {...props} disabled={new Date() < monthEnd} />;
+    };
+
+    useEffect(() => {
+        setBooked(dates);
+    }, [data?.[0]?.articleDate]);
+
     return (
-        <DayPicker
-            className="react-day-picker"
-            mode="multiple"
-            selected={dates}
-        />
+        <>
+            <DayPicker
+                timeZone="UTC"
+                className="react-day-picker"
+                components={{
+                    NextMonthButton: CustomNextMonthBtn,
+                }}
+                modifiers={{
+                    booked: booked,
+                    today: new Date(),
+                }}
+                //hidden after the end of the month
+                hidden={{
+                    after: new Date(
+                        month.getFullYear(),
+                        month.getMonth() + 1,
+                        0
+                    ),
+                }}
+                disabled={{ after: new Date() }}
+                modifiersClassNames={{
+                    booked: "rdp-booked_day",
+                    today: "bg-primary text-white rounded-md",
+                }}
+                onMonthChange={setMonth}
+            />
+        </>
     );
 };
 

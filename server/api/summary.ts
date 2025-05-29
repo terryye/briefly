@@ -1,11 +1,10 @@
 import { createTRPCRouter, protectedProcedure } from "@/server/api/trpc";
-//import { format } from "date-fns";
 
 import { and, desc, eq, gte, inArray, lte } from "drizzle-orm";
 import { z } from "zod";
 import { db, schema } from "../db";
 import { askAI } from "../openai";
-
+import { format } from "date-fns";
 const t_article = schema.article;
 const t_summary = schema.summary;
 
@@ -80,7 +79,7 @@ export default createTRPCRouter({
                 post: input.post,
                 userId: ctx.session?.user.id,
                 feedback: feedback,
-                article_date: article.date,
+                articleDate: article.date,
             };
 
             const respond = await db
@@ -137,8 +136,14 @@ export default createTRPCRouter({
                 .where(
                     and(
                         eq(t_summary.userId, ctx.session.user.id),
-                        gte(t_article.date, input.startDate.toISOString()),
-                        lte(t_article.date, input.endDate.toISOString())
+                        gte(
+                            t_summary.articleDate,
+                            format(input.startDate, "yyyy-MM-dd")
+                        ),
+                        lte(
+                            t_summary.articleDate,
+                            format(input.endDate, "yyyy-MM-dd")
+                        )
                     )
                 );
             return result;
