@@ -5,6 +5,7 @@ import { api } from "@/trpc/react";
 import { useEffect, useState } from "react";
 import {
     DayPicker,
+    defaultLocale,
     NextMonthButton,
     NextMonthButtonProps,
 } from "react-day-picker";
@@ -33,7 +34,7 @@ const Calendar = () => {
     return (
         <>
             <DayPicker
-                timeZone="UTC"
+                locale={defaultLocale}
                 className="react-day-picker"
                 components={{
                     NextMonthButton: CustomNextMonthBtn,
