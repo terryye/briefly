@@ -16,3 +16,7 @@
     color: #ffffff;
     border-radius: 10%;
 }
+
+textarea {
+    resize: none;
+}
