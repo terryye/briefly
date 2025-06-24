@@ -2,6 +2,7 @@ import Badge from "@/app/components/ui/badge";
 import { HydrateClient, api } from "@/trpc/server";
 import Image from "next/image";
 import Link from "next/link";
+import reactStringReplace from "react-string-replace";
 
 type Params = Promise<{ id: string }>;
 
@@ -12,6 +13,8 @@ export default async function NewsPage({ params }: { params: Params }) {
         articleId == "today"
             ? await api.article.latest()
             : await api.article.view({ articleId });
+
+    const lines = article.content.split("\n");
 
     return (
         <HydrateClient>
@@ -38,7 +41,21 @@ export default async function NewsPage({ params }: { params: Params }) {
                         className="py-4 object-fill"
                         src={article.poster}
                     />
-                    {article.content}
+
+                    <div>
+                        {lines.map((line, index) => (
+                            // Render each line within a <p> tag, using a unique key for each paragraph
+                            <p key={index} className="mt-2">
+                                {reactStringReplace(
+                                    line,
+                                    /_([^_]*)_/g,
+                                    (match, i) => (
+                                        <i key={i}>{match}</i>
+                                    )
+                                )}
+                            </p>
+                        ))}
+                    </div>
                 </article>
             </div>
         </HydrateClient>
