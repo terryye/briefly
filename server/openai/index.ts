@@ -87,4 +87,45 @@ export const askAI = async (
     });
     return response.output_parsed as Feedback;
 };
-export type { Feedback };
+
+const questionSchema = z.object({
+    summaryQuestions: z.array(z.string()),
+    discussQuestions: z.array(z.string()),
+});
+
+type Questions = z.infer<typeof questionSchema>;
+export const aiQuestions = async (title: string, article: string) => {
+    const response = await openai.responses.parse({
+        model: "gpt-4o",
+        input: [
+            {
+                role: "system",
+                content: [
+                    {
+                        type: "input_text",
+                        text: `You are an ESL tutor. User will provide a news article. Please:
+1: create 3 - 5 questions to help me grasp the main infomation of the news, then I can easily summarize it.
+2: create 5 - 6 discussion questions related to this news. The questions should connect the topic to everyday life or personal experience, so it's easy for ESL students like me to talk about them in class. Keep the questions simple and friendly for conversation practice.`,
+                    },
+                ],
+            },
+            {
+                role: "user",
+                content: [
+                    {
+                        type: "input_text",
+                        text: `${title}\n\n${article}`,
+                    },
+                ],
+            },
+        ],
+        text: {
+            format: zodTextFormat(questionSchema, "json_object"),
+        },
+        temperature: 1,
+        max_output_tokens: 4096,
+    });
+    return response.output_parsed as Questions;
+};
+
+export type { Feedback, Questions };

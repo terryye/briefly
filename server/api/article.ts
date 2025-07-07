@@ -2,8 +2,8 @@ import { createTRPCRouter, publicProcedure } from "@/server/api/trpc";
 //import { format } from "date-fns";
 
 import { desc, eq } from "drizzle-orm";
-import { db, schema } from "../db";
 import { z } from "zod";
+import { db, schema } from "../db";
 
 const t_article = schema.article;
 export type Article = typeof t_article.$inferSelect;
@@ -15,7 +15,9 @@ export default createTRPCRouter({
             .from(t_article)
             .orderBy(desc(t_article.date))
             .limit(1);
-        return result[0];
+        const data = result[0];
+
+        return data;
     }),
     view: publicProcedure
         .input(z.object({ articleId: z.string() }))

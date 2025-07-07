@@ -1,16 +1,16 @@
 import { relations, sql } from "drizzle-orm";
 import {
+    date,
     index,
     integer,
+    jsonb,
     pgTableCreator,
     primaryKey,
+    serial,
     text,
     timestamp,
-    varchar,
-    date,
-    serial,
-    jsonb,
     uuid,
+    varchar,
 } from "drizzle-orm/pg-core";
 import { type AdapterAccount } from "next-auth/adapters";
 
@@ -115,6 +115,8 @@ export const article = createTable("article", {
     createAt: timestamp("create_at", { mode: "string" }).defaultNow(),
     date: date().notNull(),
     poster: varchar({ length: 255 }).notNull(),
+    summaryQuestions: jsonb("summary_questions"),
+    discussionQuestions: jsonb("discussion_questions"),
 });
 
 export const summary = createTable("summary", {
