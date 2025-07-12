@@ -7,7 +7,7 @@ const Badge = async () => {
     if (!session?.user) {
         return null;
     }
-    const badge = await api.summary.badge();
+    const badge = await api.history.badge();
     return (
         <>
             <div className="basis-1/3 flex flex-row justify-end">

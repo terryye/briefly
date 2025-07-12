@@ -4,7 +4,6 @@ import { and, count, desc, eq, gte, inArray, lte } from "drizzle-orm";
 import { z } from "zod";
 import { db, schema } from "../db";
 import { askAI } from "../openai";
-import { format } from "date-fns";
 const t_article = schema.article;
 const t_summary = schema.summary;
 
@@ -136,14 +135,8 @@ export default createTRPCRouter({
                 .where(
                     and(
                         eq(t_summary.userId, ctx.session.user.id),
-                        gte(
-                            t_summary.articleDate,
-                            format(input.startDate, "yyyy-MM-dd")
-                        ),
-                        lte(
-                            t_summary.articleDate,
-                            format(input.endDate, "yyyy-MM-dd")
-                        )
+                        gte(t_summary.articleDate, input.startDate),
+                        lte(t_summary.articleDate, input.endDate)
                     )
                 );
             return result;
@@ -160,10 +153,7 @@ export default createTRPCRouter({
                     eq(t_summary.userId, ctx.session.user.id),
                     gte(
                         t_summary.articleDate,
-                        format(
-                            new Date(Date.now() - 31 * 24 * 60 * 60 * 1000), //31 days ago
-                            "yyyy-MM-dd"
-                        )
+                        new Date(Date.now() - 31 * 24 * 60 * 60 * 1000)
                     ),
                     eq(t_summary.userId, ctx.session.user.id)
                 )

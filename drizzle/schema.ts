@@ -1,7 +1,18 @@
-import { pgTable, varchar, timestamp, index, foreignKey, unique, serial, uuid, integer, text, jsonb, date, primaryKey } from "drizzle-orm/pg-core"
+import { pgTable, serial, uuid, integer, timestamp, varchar, index, foreignKey, unique, text, jsonb, date, primaryKey } from "drizzle-orm/pg-core"
 import { sql } from "drizzle-orm"
 
 
+
+export const brieflyHistory = pgTable("briefly_history", {
+	id: serial().primaryKey().notNull(),
+	historyId: uuid("history_id").defaultRandom().notNull(),
+	articleId: uuid("article_id").notNull(),
+	status: integer().notNull(),
+	score: integer().notNull(),
+	userId: uuid("user_id").notNull(),
+	createAt: timestamp("create_at", { withTimezone: true, mode: 'string' }).defaultNow().notNull(),
+	updateAt: timestamp("update_at", { withTimezone: true, mode: 'string' }).defaultNow().notNull(),
+});
 
 export const brieflyUser = pgTable("briefly_user", {
 	id: varchar({ length: 255 }).primaryKey().notNull(),
@@ -39,6 +50,15 @@ export const brieflySummary = pgTable("briefly_summary", {
 	unique("briefly_summary_article_id_user_id").on(table.userId, table.articleId),
 ]);
 
+export const brieflyQuestion = pgTable("briefly_question", {
+	id: serial().primaryKey().notNull(),
+	questionId: uuid("question_id").defaultRandom().notNull(),
+	articleId: uuid("article_id").notNull(),
+	seq: integer().notNull(),
+	question: text().notNull(),
+	type: integer().notNull(),
+});
+
 export const brieflyArticle = pgTable("briefly_article", {
 	id: serial().primaryKey().notNull(),
 	title: varchar({ length: 255 }).notNull(),
@@ -47,12 +67,22 @@ export const brieflyArticle = pgTable("briefly_article", {
 	date: date().notNull(),
 	poster: varchar({ length: 255 }).notNull(),
 	articleId: uuid("article_id").defaultRandom(),
-	summaryQuestions: jsonb("summary_questions"),
-	discussionQuestions: jsonb("discussion_questions"),
 }, (table) => [
 	unique("constraint_title_date").on(table.title, table.date),
 	unique("briefly_article_article_id").on(table.articleId),
 ]);
+
+export const brieflyAnswer = pgTable("briefly_answer", {
+	id: serial().notNull(),
+	answerId: uuid("answer_id").defaultRandom().notNull(),
+	answer: text().notNull(),
+	score: integer().notNull(),
+	feedbacks: jsonb().notNull(),
+	questionId: uuid("question_id").notNull(),
+	userId: uuid("user_id").notNull(),
+	articleId: uuid("article_id").notNull(),
+	createAt: timestamp("create_at", { withTimezone: true, mode: 'string' }).defaultNow().notNull(),
+});
 
 export const brieflyVerificationToken = pgTable("briefly_verification_token", {
 	identifier: varchar({ length: 255 }).notNull(),

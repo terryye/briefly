@@ -112,11 +112,45 @@ export const article = createTable("article", {
     articleId: uuid("article_id").defaultRandom().notNull(),
     title: varchar({ length: 255 }).notNull(),
     content: text().notNull(),
-    createAt: timestamp("create_at", { mode: "string" }).defaultNow(),
-    date: date().notNull(),
+    createAt: timestamp("create_at", {
+        mode: "date",
+        withTimezone: true,
+    }).defaultNow(),
+    date: date({ mode: "date" }).notNull(),
     poster: varchar({ length: 255 }).notNull(),
-    summaryQuestions: jsonb("summary_questions"),
-    discussionQuestions: jsonb("discussion_questions"),
+});
+
+export interface Feedback {
+    title: string;
+    content: string;
+}
+
+export const answer = createTable("answer", {
+    id: serial().primaryKey().notNull(),
+    answerId: uuid("answer_id").defaultRandom().notNull(),
+    answer: text().notNull(),
+    score: integer().notNull(),
+    createAt: timestamp("create_at", {
+        mode: "date",
+        withTimezone: true,
+    }).defaultNow(),
+    feedbacks: jsonb().$type<Feedback[]>(),
+    questionId: uuid("question_id").notNull(),
+    userId: uuid("user_id").notNull(),
+    articleId: uuid("article_id").notNull(),
+    updateAt: timestamp("update_at", {
+        mode: "date",
+        withTimezone: true,
+    }).defaultNow(),
+});
+
+export const question = createTable("question", {
+    id: serial().primaryKey().notNull(),
+    questionId: uuid("question_id").defaultRandom().notNull(),
+    articleId: uuid("article_id").notNull(),
+    seq: integer().notNull(),
+    question: text().notNull(),
+    type: integer().notNull(),
 });
 
 export const summary = createTable("summary", {
@@ -126,7 +160,28 @@ export const summary = createTable("summary", {
     score: integer().notNull(),
     post: text().notNull(),
     userId: varchar("user_id", { length: 255 }).notNull(),
-    articleDate: date("article_date", { mode: "string" }).notNull(),
-    createAt: timestamp("create_at", { mode: "string" }).defaultNow(),
+    articleDate: date("article_date", { mode: "date" }).notNull(),
+    createAt: timestamp("create_at", {
+        mode: "date",
+        withTimezone: true,
+    }).defaultNow(),
     feedback: jsonb().notNull(),
+});
+
+export const history = createTable("history", {
+    id: serial().primaryKey().notNull(),
+    historyId: uuid("history_id").defaultRandom().notNull(),
+    articleId: uuid("article_id").notNull(),
+    score: integer().notNull(),
+    userId: varchar("user_id", { length: 255 }).notNull(),
+    createAt: timestamp("create_at", {
+        mode: "date",
+        withTimezone: true,
+    }).defaultNow(),
+    updateAt: timestamp("update_at", {
+        mode: "date",
+        withTimezone: true,
+    }).defaultNow(),
+    questionsNum: integer("questions_num").notNull(),
+    answersNum: integer("answers_num").notNull(),
 });

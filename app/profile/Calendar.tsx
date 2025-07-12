@@ -17,19 +17,22 @@ const Calendar = () => {
     const monthStart = new Date(month.getFullYear(), month.getMonth(), 1);
     const monthEnd = new Date(month.getFullYear(), month.getMonth() + 1, 0);
 
-    const { data } = api.summary.listByDateRange.useQuery({
+    const { data } = api.history.listByDateRange.useQuery({
         startDate: monthStart,
         endDate: monthEnd,
     });
 
-    const dates = data?.map((d) => new Date(d.articleDate)) ?? [];
+    const dates = data
+        ? data?.map((d) => d.createAt).filter((d) => d !== null)
+        : ([] as Date[]);
+
     const CustomNextMonthBtn = (props: NextMonthButtonProps) => {
         return <NextMonthButton {...props} disabled={new Date() < monthEnd} />;
     };
 
     useEffect(() => {
         setBooked(dates);
-    }, [data?.[0]?.articleDate]);
+    }, [data?.[0]?.createAt]);
 
     return (
         <>

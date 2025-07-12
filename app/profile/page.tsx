@@ -1,7 +1,7 @@
 import { auth } from "@/server/auth";
 import { redirect } from "next/navigation";
 import Badge from "../components/ui/badge";
-import Calendar from "../components/ui/Calendar";
+import Calendar from "./Calendar";
 import Signinout from "../components/ui/Signinout";
 import ProfileCard from "./ProfileCard";
 

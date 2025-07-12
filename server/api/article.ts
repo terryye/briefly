@@ -16,7 +16,6 @@ export default createTRPCRouter({
             .orderBy(desc(t_article.date))
             .limit(1);
         const data = result[0];
-
         return data;
     }),
     view: publicProcedure
@@ -29,7 +28,8 @@ export default createTRPCRouter({
                 .orderBy(desc(t_article.date))
                 .limit(1);
 
-            return result[0];
+            const data = result[0];
+            return data;
         }),
     list: publicProcedure.query(async () => {
         const result = await db
@@ -41,3 +41,13 @@ export default createTRPCRouter({
         return result;
     }),
 });
+
+export const getArticleById = async (articleId: string) => {
+    const result = await db
+        .select()
+        .from(t_article)
+        .where(eq(t_article.articleId, articleId))
+        .orderBy(desc(t_article.date))
+        .limit(1);
+    return result[0];
+};

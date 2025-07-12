@@ -1,4 +1,4 @@
-import { Summary } from "@/server/api/summary";
+import { History } from "@/server/api/history";
 import { auth } from "@/server/auth";
 import { HydrateClient, api } from "@/trpc/server";
 import Image from "next/image";
@@ -15,13 +15,13 @@ const HistoryPage = async () => {
 
     const articles = await api.article.list();
 
-    const summaries = await api.summary.listByIds({
+    const histories = await api.history.listByIds({
         articleIds: articles.map((item) => item.articleId),
     });
 
-    const summariesMap = new Map<string, Summary>();
-    summaries.forEach((item) => {
-        summariesMap.set(item.articleId, item);
+    const historiesMap = new Map<string, History>();
+    histories.forEach((item) => {
+        historiesMap.set(item.articleId, item);
     });
 
     return (
@@ -37,56 +37,73 @@ const HistoryPage = async () => {
                     <li className="p-4 pb-2 text-xs opacity-60 tracking-wide">
                         Recent News / Articles
                     </li>
-                    {articles.map((item) => (
-                        <li className="list-row" key={item.articleId}>
-                            <div>
-                                <Image
-                                    width={40}
-                                    height={40}
-                                    alt={item.title}
-                                    className="size-10 rounded-box"
-                                    src={item.poster}
-                                />
-                            </div>
-                            <div>
+                    {articles.map((item) => {
+                        const history = historiesMap.get(item.articleId);
+                        return (
+                            <li className="list-row" key={item.articleId}>
                                 <div>
-                                    <Link href={`/news/${item.articleId}`}>
-                                        {item.title}
-                                    </Link>
+                                    <Image
+                                        width={40}
+                                        height={40}
+                                        alt={item.title}
+                                        className="size-10 rounded-box"
+                                        src={item.poster}
+                                    />
                                 </div>
-                                <div className="text-xs  font-semibold opacity-60">
-                                    {summariesMap.get(item.articleId) ? (
-                                        <>
-                                            <div className="badge badge-success mr-2 text-white">
-                                                {Icons.score}
-                                                {
-                                                    summariesMap.get(
-                                                        item.articleId
-                                                    )?.score
-                                                }
-                                            </div>
+                                <div>
+                                    <div>
+                                        <Link href={`/news/${item.articleId}`}>
+                                            {item.title}
+                                        </Link>
+                                    </div>
+                                    <div className="text-xs  font-semibold opacity-60 flex flex-row ">
+                                        {/* not started */}
+                                        {!history && <></>}
 
-                                            <button className="btn btn-xs mr-2">
-                                                <Link
-                                                    href={`/summarize?summary_id=${
-                                                        summariesMap.get(
-                                                            item.articleId
-                                                        )?.summaryId
-                                                    }`}
-                                                >
-                                                    View Submission
-                                                </Link>
-                                            </button>
-                                        </>
-                                    ) : (
-                                        <div className="text-xs  font-semibold opacity-60">
-                                            Not done yet
-                                        </div>
-                                    )}
+                                        {/* started */}
+                                        {history && (
+                                            <>
+                                                {history.answersNum ==
+                                                history.questionsNum ? ( // finished
+                                                    <>
+                                                        <div className="badge  badge-success badge-outline  mr-2">
+                                                            {Icons.check} Done
+                                                        </div>
+                                                        <div className="text-xs  font-semibold opacity-60 mt-1"></div>
+                                                    </>
+                                                ) : (
+                                                    // not finished yet
+                                                    <>
+                                                        <div className="badge badge-warning badge-outline  mr-2">
+                                                            {Icons.pause}
+                                                            Working
+                                                        </div>
+                                                        <div className="text-xs  font-semibold  opacity-60 mt-1">
+                                                            {/* finished */}
+                                                            Progress:{" "}
+                                                            {history.answersNum}
+                                                            /
+                                                            {
+                                                                history.questionsNum
+                                                            }
+                                                        </div>
+                                                    </>
+                                                )}
+                                            </>
+                                        )}
+
+                                        {historiesMap.get(item.articleId) &&
+                                            historiesMap.get(item.articleId)
+                                                ?.score == undefined && (
+                                                <div className="text-xs  font-semibold opacity-60">
+                                                    Not done yet
+                                                </div>
+                                            )}
+                                    </div>
                                 </div>
-                            </div>
-                        </li>
-                    ))}
+                            </li>
+                        );
+                    })}
                     <li className="list-row hidden">
                         <div>
                             <Image
