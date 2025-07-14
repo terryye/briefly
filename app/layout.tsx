@@ -38,13 +38,11 @@ export default function RootLayout({
                 className={`${geistSans.variable} ${geistMono.variable} antialiased`}
             >
                 <div className="flex flex-col h-screen">
-                    <div className="overflow-auto">
-                        <TRPCReactProvider>
-                            <LoginProvider>
-                                <SessionProvider>{children}</SessionProvider>
-                            </LoginProvider>
-                        </TRPCReactProvider>
-                    </div>
+                    <TRPCReactProvider>
+                        <LoginProvider>
+                            <SessionProvider>{children}</SessionProvider>
+                        </LoginProvider>
+                    </TRPCReactProvider>
                     <div style={{ minHeight: 64 }}>{/* space for dock*/}</div>
                 </div>
                 <Dock />
