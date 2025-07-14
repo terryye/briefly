@@ -1,10 +1,11 @@
 "use client";
 import Icons from "@/app/components/ui/Icons";
 import Loading from "@/app/components/ui/Loading";
+import { useLogin } from "@/app/providers/LoginProvider";
 import type { Answer } from "@/server/api/answer";
 import type { Question } from "@/server/api/question";
 import { api } from "@/trpc/react";
-import { signIn, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import { useState } from "react";
 
 const QuestionItem = ({
@@ -15,6 +16,7 @@ const QuestionItem = ({
     answer: Answer | null;
 }) => {
     const { status: sessionStatus } = useSession();
+    const { showLogin } = useLogin();
 
     const [status, setStatus] = useState<"editing" | "viewing" | "submitting">(
         "viewing"
@@ -26,6 +28,7 @@ const QuestionItem = ({
     const [answerContent, setAnswerContent] = useState<string | null>(
         answer?.answer ?? null
     );
+
     const submitMutation = api.answer.submit.useMutation({
         onSuccess: (data) => {
             setStatus("viewing");
@@ -38,7 +41,7 @@ const QuestionItem = ({
     });
     const handleSubmit = async () => {
         if (sessionStatus !== "authenticated") {
-            signIn();
+            showLogin();
             return;
         }
         if (!answerContent) {
@@ -110,6 +113,10 @@ const QuestionItem = ({
                             setIsFocused(true);
                         }}
                         onChange={(e) => {
+                            if (sessionStatus !== "authenticated") {
+                                showLogin();
+                                return;
+                            }
                             setAnswerContent(e.target.value);
                         }}
                         onBlur={() => {

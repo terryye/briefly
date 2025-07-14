@@ -1,6 +1,27 @@
-import { api, HydrateClient } from "@/trpc/server";
+"use client";
+import { useState } from "react";
+
+export default function Home() {
+    const [showLogin, setShowLogin] = useState(false);
+
+    return (
+        <>
+            <button
+                onClick={() => {
+                    setShowLogin(true);
+                }}
+                className="btn btn-primary"
+            >
+                Login
+            </button>
+        </>
+    );
+}
+
+/*
 import { Test } from "@/app/components/test";
 import { auth } from "@/server/auth";
+import { api, HydrateClient } from "@/trpc/server";
 
 export default async function Home() {
     const result = await api.test.foo({ test: "你好" });
@@ -29,3 +50,4 @@ export default async function Home() {
         </HydrateClient>
     );
 }
+*/

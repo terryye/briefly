@@ -10,6 +10,7 @@
     },
     "dependencies": {
         "@auth/drizzle-adapter": "^1.9.0",
+        "@iframe-resizer/react": "^5.4.7",
         "@tanstack/react-query": "^5.74.7",
         "@trpc/client": "^11.0.0",
         "@trpc/next": "^11.0.0",

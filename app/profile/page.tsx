@@ -1,8 +1,8 @@
 import { auth } from "@/server/auth";
 import { redirect } from "next/navigation";
-import Badge from "../components/ui/badge";
-import Calendar from "./Calendar";
+import Badge from "../components/ui/Badge";
 import Signinout from "../components/ui/Signinout";
+import Calendar from "./Calendar";
 import ProfileCard from "./ProfileCard";
 
 export default async function ProfilePage() {

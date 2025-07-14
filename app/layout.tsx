@@ -4,6 +4,7 @@ import { SessionProvider } from "next-auth/react";
 import { Geist, Geist_Mono } from "next/font/google";
 import Dock from "./components/ui/Dock";
 import "./globals.css";
+import { LoginProvider } from "./providers/LoginProvider";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -39,7 +40,9 @@ export default function RootLayout({
                 <div className="flex flex-col h-screen">
                     <div className="overflow-auto">
                         <TRPCReactProvider>
-                            <SessionProvider>{children}</SessionProvider>
+                            <LoginProvider>
+                                <SessionProvider>{children}</SessionProvider>
+                            </LoginProvider>
                         </TRPCReactProvider>
                     </div>
                     <div style={{ minHeight: 64 }}>{/* space for dock*/}</div>
