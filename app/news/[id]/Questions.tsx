@@ -2,6 +2,7 @@
 import Loading from "@/app/components/ui/Loading";
 import { Answer } from "@/server/api/answer";
 import { api } from "@/trpc/react";
+import { useState } from "react";
 import { QuestionItem } from "./QuestionItem";
 import SumupItem from "./SumupItem";
 
@@ -15,6 +16,10 @@ const Questions = ({ articleId }: { articleId: string }) => {
             articleId: articleId,
         });
     const utils = api.useUtils();
+
+    const [focusedQuestionId, setFocusedQuestionId] = useState<string | null>(
+        null
+    );
 
     const handleAnswerUpdate = (questionId: string, newAnswer: Answer) => {
         utils.answer.list.setData(
@@ -55,6 +60,10 @@ const Questions = ({ articleId }: { articleId: string }) => {
                         setAnswer={(answer) =>
                             handleAnswerUpdate(q.questionId, answer)
                         }
+                        isFocused={q.questionId === focusedQuestionId}
+                        setFocused={(questionId: string) =>
+                            setFocusedQuestionId(questionId)
+                        }
                     />
                 ))}
             </fieldset>
@@ -70,6 +79,10 @@ const Questions = ({ articleId }: { articleId: string }) => {
                             answer={answersMap.get(q.questionId) ?? null}
                             setAnswer={(answer) =>
                                 handleAnswerUpdate(q.questionId, answer)
+                            }
+                            isFocused={q.questionId === focusedQuestionId}
+                            setFocused={(questionId: string) =>
+                                setFocusedQuestionId(questionId)
                             }
                         />
                     ))}

@@ -12,10 +12,14 @@ export const QuestionItem = ({
     question,
     answer,
     setAnswer,
+    isFocused,
+    setFocused,
 }: {
     question: Question;
     answer: Answer | null;
     setAnswer(answer: Answer): void;
+    isFocused: boolean;
+    setFocused(questionId: string): void;
 }) => {
     const { status: sessionStatus } = useSession();
     const { showLogin } = useLogin();
@@ -23,8 +27,6 @@ export const QuestionItem = ({
     const [status, setStatus] = useState<"editing" | "viewing" | "submitting">(
         answer?.answer ? "viewing" : "editing"
     );
-
-    const [isFocused, setIsFocused] = useState<boolean>(false);
 
     const [answerContent, setAnswerContent] = useState<string | null>(
         answer?.answer ?? null
@@ -111,7 +113,7 @@ export const QuestionItem = ({
                         className="textarea w-full my-2"
                         placeholder=""
                         onFocus={() => {
-                            setIsFocused(true);
+                            setFocused(question.questionId);
                         }}
                         onChange={(e) => {
                             if (sessionStatus !== "authenticated") {
@@ -120,17 +122,12 @@ export const QuestionItem = ({
                             }
                             setAnswerContent(e.target.value);
                         }}
-                        onBlur={() => {
-                            setIsFocused(false);
-                        }}
                         value={answerContent ?? ""}
                     />
-                    {answer?.answer ? (
+                    {answer?.answer && isFocused && (
                         <div className="flex flex-row gap-2 justify-center">
                             <button
-                                className={`btn flex-1 ${
-                                    isFocused ? "btn-neutral" : ""
-                                }`}
+                                className="btn flex-1 btn-neutral"
                                 onClick={handleSubmit}
                             >
                                 Done, Update
@@ -139,11 +136,11 @@ export const QuestionItem = ({
                                 Cancel
                             </button>
                         </div>
-                    ) : (
+                    )}
+
+                    {!answer?.answer && isFocused && (
                         <button
-                            className={`btn btn-block ${
-                                isFocused ? "btn-neutral" : "btn-default"
-                            }`}
+                            className={`btn btn-block btn-neutral`}
                             onClick={handleSubmit}
                         >
                             Done, Submit
