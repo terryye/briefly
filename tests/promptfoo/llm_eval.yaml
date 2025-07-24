@@ -1,0 +1,165 @@
+# Promptfoo configuration for llm_evaluate.ts
+description: "Test cases for English teacher evaluation prompts"
+
+providers:
+    - id: openai:gpt-4o
+      config:
+          response_format:
+              type: json_object
+prompts:
+    - id: comprehension_prompt
+      raw: |
+          You are a English teacher.
+          You privode the user a article and some questions to help the user grasp the main infomation of the article. Evaluate the user's answer to one of the questions about the article. If the user's answer is not related to the question or empty, score should be 0. Output a JSON object.  {"score": the score of the answer (0-10),  "feedback": a brief feedback to user's answer, "improved": the improved answer}.
+          Article: 
+              {{title}}
+              {{article}}
+          Questions: 
+              {{question}}
+
+          User's answer: 
+              "{{answer}}"
+
+    - id: discussion_prompt
+      raw: |
+          You are a English teacher.
+          You privode the user an article and some discussion questions related to this article. The questions is related to the article's topic to everyday life or personal experience, so it's easy for ESL students like me to talk about them in class. Evaluate the user's answer to one of the questions about the article. Output a JSON object. {"score": the score of the answer (0-10),  "feedback": a brief feedback to user's answer}, "improved": the improved answer.
+          Article: 
+              {{title}}
+              {{article}}
+          Questions: 
+              {{question}}
+
+          User's answer:
+              "{{answer}}"
+
+tests:
+    # Test Case 1: Climate Change Article - Comprehension Question
+    - vars:
+          title: "Global Climate Change: Causes and Effects"
+          article: "Climate change refers to long-term shifts in global temperatures and weather patterns. While climate variations occur naturally, human activities have been the dominant driver since the 1800s, primarily due to the burning of fossil fuels like coal, oil, and gas. These activities release greenhouse gases such as carbon dioxide and methane, which trap heat in the atmosphere and cause global warming. The effects include rising sea levels, extreme weather events, and disruptions to ecosystems."
+          question: "What are the main causes of climate change according to the article?"
+          answer: "The main cause is burning fossil fuels"
+      assert:
+          - type: is-json
+          - type: javascript
+            value: |
+                const parsed = JSON.parse(output);
+                return parsed.score >= 0 && parsed.score <= 10;
+          - type: javascript
+            value: |
+                const parsed = JSON.parse(output);
+                return parsed.feedback && parsed.feedback.length > 10;
+          - type: javascript
+            value: |
+                const parsed = JSON.parse(output);
+                return parsed.improved && parsed.improved.length > 10;
+
+    # Test Case 2: Climate Change Article - Discussion Question
+    - vars:
+          title: "Global Climate Change: Causes and Effects"
+          article: "Climate change refers to long-term shifts in global temperatures and weather patterns. While climate variations occur naturally, human activities have been the dominant driver since the 1800s, primarily due to the burning of fossil fuels like coal, oil, and gas. These activities release greenhouse gases such as carbon dioxide and methane, which trap heat in the atmosphere and cause global warming. The effects include rising sea levels, extreme weather events, and disruptions to ecosystems."
+          question: "How do you personally contribute to reducing climate change in your daily life?"
+          answer: "I recycle sometimes and try to use less plastic bags when shopping"
+      assert:
+          - type: is-json
+          - type: javascript
+            value: |
+                const parsed = JSON.parse(output);
+                return parsed.score >= 0 && parsed.score <= 10;
+
+    # Test Case 3: Technology Article - Perfect Answer
+    - vars:
+          title: "The Impact of Artificial Intelligence on Education"
+          article: "Artificial Intelligence (AI) is revolutionizing education by providing personalized learning experiences, automating administrative tasks, and offering intelligent tutoring systems. AI can analyze student performance data to identify learning gaps and suggest targeted interventions. Virtual assistants can answer student questions 24/7, while automated grading systems save teachers valuable time. However, concerns about data privacy and the digital divide remain significant challenges."
+          question: "What are the benefits of AI in education mentioned in the article?"
+          answer: "According to the article, AI benefits education in several ways: it provides personalized learning experiences tailored to individual students, automates time-consuming administrative tasks for educators, offers intelligent tutoring systems that can provide additional support, analyzes student performance data to identify learning gaps, provides 24/7 availability through virtual assistants, and saves teachers time through automated grading systems."
+      assert:
+          - type: javascript
+            value: |
+                const parsed = JSON.parse(output);
+                return parsed.score >= 8;
+
+    # Test Case 4: Technology Article - Poor Answer
+    - vars:
+          title: "The Impact of Artificial Intelligence on Education"
+          article: "Artificial Intelligence (AI) is revolutionizing education by providing personalized learning experiences, automating administrative tasks, and offering intelligent tutoring systems. AI can analyze student performance data to identify learning gaps and suggest targeted interventions. Virtual assistants can answer student questions 24/7, while automated grading systems save teachers valuable time. However, concerns about data privacy and the digital divide remain significant challenges."
+          question: "What are the benefits of AI in education mentioned in the article?"
+          answer: "AI is good"
+      assert:
+          - type: javascript
+            value: |
+                const parsed = JSON.parse(output);
+                return parsed.score <= 3;
+          - type: javascript
+            value: |
+                const parsed = JSON.parse(output);
+                return parsed.feedback.toLowerCase().includes('specific') || parsed.feedback.toLowerCase().includes('detail');
+
+    # Test Case 5: Health Article - Grammar Errors
+    - vars:
+          title: "The Importance of Sleep for Mental Health"
+          article: "Sleep plays a crucial role in maintaining good mental health. During sleep, the brain processes emotions and consolidates memories. Lack of sleep can lead to increased stress, anxiety, and depression. Adults should aim for 7-9 hours of quality sleep per night. Good sleep hygiene includes maintaining a regular sleep schedule, avoiding screens before bedtime, and creating a comfortable sleep environment."
+          question: "Why is sleep important for mental health?"
+          answer: "Sleep are very important because brain need rest and when no sleep people feeling bad and stress more. Also memory not work good without sleeps."
+      assert:
+          - type: javascript
+            value: |
+                const parsed = JSON.parse(output);
+                return parsed.feedback.toLowerCase().includes('gramma');
+
+    # Test Case 6: Environment Article - Off-topic Answer
+    - vars:
+          title: "Ocean Pollution and Marine Life"
+          article: "Ocean pollution poses a severe threat to marine ecosystems. Plastic waste, chemical runoff, and oil spills contaminate ocean waters, harming sea creatures and disrupting food chains. Microplastics are particularly dangerous as they are consumed by small organisms and accumulate up the food chain. Conservation efforts include reducing plastic use, improving waste management, and establishing marine protected areas."
+          question: "What are the main types of ocean pollution mentioned?"
+          answer: "I love going to the beach in summer. The water is usually warm and I enjoy swimming with my friends."
+      assert:
+          - type: javascript
+            value: |
+                const parsed = JSON.parse(output);
+                return parsed.score <= 2;
+          - type: llm-rubric
+            value: answer is not relevant to the question;
+
+    # Test Case 7: Edge Case - Empty Answer
+    - vars:
+          title: "Renewable Energy Sources"
+          article: "Renewable energy comes from natural sources that replenish themselves, including solar, wind, hydroelectric, and geothermal power. These sources produce little to no greenhouse gas emissions and help combat climate change. Solar panels convert sunlight into electricity, while wind turbines harness wind power. Despite higher initial costs, renewable energy is becoming increasingly cost-competitive with fossil fuels."
+          question: "What are the main types of renewable energy mentioned?"
+          answer: ""
+      assert:
+          - type: is-json
+          - type: javascript
+            value: |
+                const parsed = JSON.parse(output);
+                return parsed.score === 0;
+
+    # Test Case 8: Discussion Question - Personal Experience
+    - vars:
+          title: "The Benefits of Learning a Second Language"
+          article: "Learning a second language offers numerous cognitive and social benefits. It improves memory, enhances problem-solving skills, and increases cultural awareness. Bilingual individuals often have better job opportunities and can communicate with a wider range of people. Language learning also delays cognitive decline in older adults and improves multitasking abilities."
+          question: "Share your experience learning English. What has been the most challenging and rewarding part?"
+          answer: "Learning English has been a journey for me. The most challenging part is pronunciation because English sounds are very different from my native language. Sometimes I feel embarrassed when people don't understand me. But the rewarding part is being able to watch movies without subtitles and make friends from different countries. It opens many doors for me."
+      assert:
+          - type: javascript
+            value: |
+                const parsed = JSON.parse(output);
+                return parsed.score >= 6;
+          - type: javascript
+            value: |
+                const parsed = JSON.parse(output);
+                return parsed.feedback.includes('personal') || parsed.feedback.includes('experience');
+
+# Additional test configuration
+defaultTest:
+    assert:
+        - type: is-json
+        - type: javascript
+          value: |
+              const parsed = JSON.parse(output);
+              return parsed.hasOwnProperty('score') && 
+                     parsed.hasOwnProperty('feedback') && 
+                     parsed.hasOwnProperty('improved');
+
+outputPath: results.json

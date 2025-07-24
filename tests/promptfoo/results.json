@@ -1,0 +1,2162 @@
+{
+  "evalId": "eval-Yck-2025-07-24T20:38:30",
+  "results": {
+    "version": 3,
+    "timestamp": "2025-07-24T20:38:30.147Z",
+    "prompts": [
+      {
+        "raw": "You are a English teacher.\nYou privode the user a article and some questions to help the user grasp the main infomation of the article. Evaluate the user's answer to one of the questions about the article. If the user's answer is not related to the question or empty, score should be 0. Output a JSON object.  {\"score\": the score of the answer (0-10),  \"feedback\": a brief feedback to user's answer, \"improved\": the improved answer}.\nArticle: \n    {{title}}\n    {{article}}\nQuestions: \n    {{question}}\n\nUser's answer: \n    \"{{answer}}\"\n",
+        "label": "You are a English teacher.\nYou privode the user a article and some questions to help the user grasp the main infomation of the article. Evaluate the user's answer to one of the questions about the article. If the user's answer is not related to the question or empty, score should be 0. Output a JSON object.  {\"score\": the score of the answer (0-10),  \"feedback\": a brief feedback to user's answer, \"improved\": the improved answer}.\nArticle: \n    {{title}}\n    {{article}}\nQuestions: \n    {{question}}\n\nUser's answer: \n    \"{{answer}}\"\n",
+        "id": "928527a92712370131fda159d2668e8264d4a54abdbd662baeb9bd50dd45e058",
+        "provider": "openai:gpt-4o",
+        "metrics": {
+          "score": 8,
+          "testPassCount": 8,
+          "testFailCount": 0,
+          "testErrorCount": 0,
+          "assertPassCount": 32,
+          "assertFailCount": 0,
+          "totalLatencyMs": 88,
+          "tokenUsage": {
+            "total": 2641,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 2641,
+            "numRequests": 8,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0
+            },
+            "assertions": {
+              "total": 297,
+              "prompt": 0,
+              "completion": 0,
+              "cached": 297
+            }
+          },
+          "namedScores": {},
+          "namedScoresCount": {},
+          "cost": 0.011912500000000001
+        }
+      },
+      {
+        "raw": "You are a English teacher.\nYou privode the user an article and some discussion questions related to this article. The questions is related to the article's topic to everyday life or personal experience, so it's easy for ESL students like me to talk about them in class. Evaluate the user's answer to one of the questions about the article. Output a JSON object. {\"score\": the score of the answer (0-10),  \"feedback\": a brief feedback to user's answer}, \"improved\": the improved answer.\nArticle: \n    {{title}}\n    {{article}}\nQuestions: \n    {{question}}\n\nUser's answer:\n    \"{{answer}}\"\n",
+        "label": "You are a English teacher.\nYou privode the user an article and some discussion questions related to this article. The questions is related to the article's topic to everyday life or personal experience, so it's easy for ESL students like me to talk about them in class. Evaluate the user's answer to one of the questions about the article. Output a JSON object. {\"score\": the score of the answer (0-10),  \"feedback\": a brief feedback to user's answer}, \"improved\": the improved answer.\nArticle: \n    {{title}}\n    {{article}}\nQuestions: \n    {{question}}\n\nUser's answer:\n    \"{{answer}}\"\n",
+        "id": "a21aefadc5686273b93d96c4a55d63c1942f775e13bd695b30c3658e2a1715cc",
+        "provider": "openai:gpt-4o",
+        "metrics": {
+          "score": 8,
+          "testPassCount": 8,
+          "testFailCount": 0,
+          "testErrorCount": 0,
+          "assertPassCount": 32,
+          "assertFailCount": 0,
+          "totalLatencyMs": 98,
+          "tokenUsage": {
+            "total": 2894,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 2894,
+            "numRequests": 8,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0
+            },
+            "assertions": {
+              "total": 319,
+              "prompt": 0,
+              "completion": 0,
+              "cached": 319
+            }
+          },
+          "namedScores": {},
+          "namedScoresCount": {},
+          "cost": 0.014262500000000001
+        }
+      }
+    ],
+    "results": [
+      {
+        "cost": 0.001585,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "is-json"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "const parsed = JSON.parse(output);\nreturn parsed.hasOwnProperty('score') && \n       parsed.hasOwnProperty('feedback') && \n       parsed.hasOwnProperty('improved');\n"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "is-json"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "const parsed = JSON.parse(output);\nreturn parsed.score >= 0 && parsed.score <= 10;\n"
+              }
+            }
+          ],
+          "assertion": null
+        },
+        "id": "08e834fa-e2d5-4abe-a8cb-98ff4d47d4d2",
+        "latencyMs": 4,
+        "namedScores": {},
+        "prompt": {
+          "raw": "You are a English teacher.\nYou privode the user a article and some questions to help the user grasp the main infomation of the article. Evaluate the user's answer to one of the questions about the article. If the user's answer is not related to the question or empty, score should be 0. Output a JSON object.  {\"score\": the score of the answer (0-10),  \"feedback\": a brief feedback to user's answer, \"improved\": the improved answer}.\nArticle: \n    Global Climate Change: Causes and Effects\n    Climate change refers to long-term shifts in global temperatures and weather patterns. While climate variations occur naturally, human activities have been the dominant driver since the 1800s, primarily due to the burning of fossil fuels like coal, oil, and gas. These activities release greenhouse gases such as carbon dioxide and methane, which trap heat in the atmosphere and cause global warming. The effects include rising sea levels, extreme weather events, and disruptions to ecosystems.\nQuestions: \n    How do you personally contribute to reducing climate change in your daily life?\n\nUser's answer: \n    \"I recycle sometimes and try to use less plastic bags when shopping\"\n",
+          "label": "You are a English teacher.\nYou privode the user a article and some questions to help the user grasp the main infomation of the article. Evaluate the user's answer to one of the questions about the article. If the user's answer is not related to the question or empty, score should be 0. Output a JSON object.  {\"score\": the score of the answer (0-10),  \"feedback\": a brief feedback to user's answer, \"improved\": the improved answer}.\nArticle: \n    {{title}}\n    {{article}}\nQuestions: \n    {{question}}\n\nUser's answer: \n    \"{{answer}}\"\n"
+        },
+        "promptId": "928527a92712370131fda159d2668e8264d4a54abdbd662baeb9bd50dd45e058",
+        "promptIdx": 0,
+        "provider": {
+          "id": "openai:gpt-4o",
+          "label": ""
+        },
+        "response": {
+          "output": "{\"score\": 7, \"feedback\": \"Your answer addresses your personal contributions to reducing climate change, focusing on recycling and reducing plastic bag usage. While these actions are beneficial, consider providing more details or additional practices you follow.\", \"improved\": \"I make a conscious effort to recycle regularly and minimize plastic waste by using reusable shopping bags. Additionally, I try to reduce energy consumption at home by turning off lights when not needed and using public transport whenever possible instead of driving.\"}",
+          "tokenUsage": {
+            "cached": 343,
+            "total": 343
+          },
+          "cached": true,
+          "finishReason": "stop",
+          "cost": 0.001585
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "vars": {
+            "title": "Global Climate Change: Causes and Effects",
+            "article": "Climate change refers to long-term shifts in global temperatures and weather patterns. While climate variations occur naturally, human activities have been the dominant driver since the 1800s, primarily due to the burning of fossil fuels like coal, oil, and gas. These activities release greenhouse gases such as carbon dioxide and methane, which trap heat in the atmosphere and cause global warming. The effects include rising sea levels, extreme weather events, and disruptions to ecosystems.",
+            "question": "How do you personally contribute to reducing climate change in your daily life?",
+            "answer": "I recycle sometimes and try to use less plastic bags when shopping"
+          },
+          "assert": [
+            {
+              "type": "is-json"
+            },
+            {
+              "type": "javascript",
+              "value": "const parsed = JSON.parse(output);\nreturn parsed.hasOwnProperty('score') && \n       parsed.hasOwnProperty('feedback') && \n       parsed.hasOwnProperty('improved');\n"
+            },
+            {
+              "type": "is-json"
+            },
+            {
+              "type": "javascript",
+              "value": "const parsed = JSON.parse(output);\nreturn parsed.score >= 0 && parsed.score <= 10;\n"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 1,
+        "vars": {
+          "title": "Global Climate Change: Causes and Effects",
+          "article": "Climate change refers to long-term shifts in global temperatures and weather patterns. While climate variations occur naturally, human activities have been the dominant driver since the 1800s, primarily due to the burning of fossil fuels like coal, oil, and gas. These activities release greenhouse gases such as carbon dioxide and methane, which trap heat in the atmosphere and cause global warming. The effects include rising sea levels, extreme weather events, and disruptions to ecosystems.",
+          "question": "How do you personally contribute to reducing climate change in your daily life?",
+          "answer": "I recycle sometimes and try to use less plastic bags when shopping"
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0.0017475000000000004,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "is-json"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "const parsed = JSON.parse(output);\nreturn parsed.hasOwnProperty('score') && \n       parsed.hasOwnProperty('feedback') && \n       parsed.hasOwnProperty('improved');\n"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "is-json"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "const parsed = JSON.parse(output);\nreturn parsed.score >= 0 && parsed.score <= 10;\n"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "const parsed = JSON.parse(output);\nreturn parsed.feedback && parsed.feedback.length > 10;\n"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "const parsed = JSON.parse(output);\nreturn parsed.improved && parsed.improved.length > 10;\n"
+              }
+            }
+          ],
+          "assertion": null
+        },
+        "id": "3d744d23-625d-4426-bb10-23ab2f34c6ee",
+        "latencyMs": 12,
+        "namedScores": {},
+        "prompt": {
+          "raw": "You are a English teacher.\nYou privode the user an article and some discussion questions related to this article. The questions is related to the article's topic to everyday life or personal experience, so it's easy for ESL students like me to talk about them in class. Evaluate the user's answer to one of the questions about the article. Output a JSON object. {\"score\": the score of the answer (0-10),  \"feedback\": a brief feedback to user's answer}, \"improved\": the improved answer.\nArticle: \n    Global Climate Change: Causes and Effects\n    Climate change refers to long-term shifts in global temperatures and weather patterns. While climate variations occur naturally, human activities have been the dominant driver since the 1800s, primarily due to the burning of fossil fuels like coal, oil, and gas. These activities release greenhouse gases such as carbon dioxide and methane, which trap heat in the atmosphere and cause global warming. The effects include rising sea levels, extreme weather events, and disruptions to ecosystems.\nQuestions: \n    What are the main causes of climate change according to the article?\n\nUser's answer:\n    \"The main cause is burning fossil fuels\"\n",
+          "label": "You are a English teacher.\nYou privode the user an article and some discussion questions related to this article. The questions is related to the article's topic to everyday life or personal experience, so it's easy for ESL students like me to talk about them in class. Evaluate the user's answer to one of the questions about the article. Output a JSON object. {\"score\": the score of the answer (0-10),  \"feedback\": a brief feedback to user's answer}, \"improved\": the improved answer.\nArticle: \n    {{title}}\n    {{article}}\nQuestions: \n    {{question}}\n\nUser's answer:\n    \"{{answer}}\"\n"
+        },
+        "promptId": "a21aefadc5686273b93d96c4a55d63c1942f775e13bd695b30c3658e2a1715cc",
+        "promptIdx": 1,
+        "provider": {
+          "id": "openai:gpt-4o",
+          "label": ""
+        },
+        "response": {
+          "output": "{\"score\": 6, \"feedback\": \"The answer accurately identifies one of the main causes of climate change mentioned in the article, which is burning fossil fuels. However, it would be more complete to also mention the release of greenhouse gases, such as carbon dioxide and methane, as part of the explanation.\", \"improved\": \"The main causes of climate change, according to the article, are the burning of fossil fuels such as coal, oil, and gas. This process releases greenhouse gases like carbon dioxide and methane into the atmosphere, leading to global warming.\"}",
+          "tokenUsage": {
+            "cached": 357,
+            "total": 357
+          },
+          "cached": true,
+          "finishReason": "stop",
+          "cost": 0.0017475000000000004
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "vars": {
+            "title": "Global Climate Change: Causes and Effects",
+            "article": "Climate change refers to long-term shifts in global temperatures and weather patterns. While climate variations occur naturally, human activities have been the dominant driver since the 1800s, primarily due to the burning of fossil fuels like coal, oil, and gas. These activities release greenhouse gases such as carbon dioxide and methane, which trap heat in the atmosphere and cause global warming. The effects include rising sea levels, extreme weather events, and disruptions to ecosystems.",
+            "question": "What are the main causes of climate change according to the article?",
+            "answer": "The main cause is burning fossil fuels"
+          },
+          "assert": [
+            {
+              "type": "is-json"
+            },
+            {
+              "type": "javascript",
+              "value": "const parsed = JSON.parse(output);\nreturn parsed.hasOwnProperty('score') && \n       parsed.hasOwnProperty('feedback') && \n       parsed.hasOwnProperty('improved');\n"
+            },
+            {
+              "type": "is-json"
+            },
+            {
+              "type": "javascript",
+              "value": "const parsed = JSON.parse(output);\nreturn parsed.score >= 0 && parsed.score <= 10;\n"
+            },
+            {
+              "type": "javascript",
+              "value": "const parsed = JSON.parse(output);\nreturn parsed.feedback && parsed.feedback.length > 10;\n"
+            },
+            {
+              "type": "javascript",
+              "value": "const parsed = JSON.parse(output);\nreturn parsed.improved && parsed.improved.length > 10;\n"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 0,
+        "vars": {
+          "title": "Global Climate Change: Causes and Effects",
+          "article": "Climate change refers to long-term shifts in global temperatures and weather patterns. While climate variations occur naturally, human activities have been the dominant driver since the 1800s, primarily due to the burning of fossil fuels like coal, oil, and gas. These activities release greenhouse gases such as carbon dioxide and methane, which trap heat in the atmosphere and cause global warming. The effects include rising sea levels, extreme weather events, and disruptions to ecosystems.",
+          "question": "What are the main causes of climate change according to the article?",
+          "answer": "The main cause is burning fossil fuels"
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0.0014100000000000002,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "is-json"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "const parsed = JSON.parse(output);\nreturn parsed.hasOwnProperty('score') && \n       parsed.hasOwnProperty('feedback') && \n       parsed.hasOwnProperty('improved');\n"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "is-json"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "const parsed = JSON.parse(output);\nreturn parsed.score >= 0 && parsed.score <= 10;\n"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "const parsed = JSON.parse(output);\nreturn parsed.feedback && parsed.feedback.length > 10;\n"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "const parsed = JSON.parse(output);\nreturn parsed.improved && parsed.improved.length > 10;\n"
+              }
+            }
+          ],
+          "assertion": null
+        },
+        "id": "e2c78e44-af2f-444a-9dd6-12efb4943528",
+        "latencyMs": 16,
+        "namedScores": {},
+        "prompt": {
+          "raw": "You are a English teacher.\nYou privode the user a article and some questions to help the user grasp the main infomation of the article. Evaluate the user's answer to one of the questions about the article. If the user's answer is not related to the question or empty, score should be 0. Output a JSON object.  {\"score\": the score of the answer (0-10),  \"feedback\": a brief feedback to user's answer, \"improved\": the improved answer}.\nArticle: \n    Global Climate Change: Causes and Effects\n    Climate change refers to long-term shifts in global temperatures and weather patterns. While climate variations occur naturally, human activities have been the dominant driver since the 1800s, primarily due to the burning of fossil fuels like coal, oil, and gas. These activities release greenhouse gases such as carbon dioxide and methane, which trap heat in the atmosphere and cause global warming. The effects include rising sea levels, extreme weather events, and disruptions to ecosystems.\nQuestions: \n    What are the main causes of climate change according to the article?\n\nUser's answer: \n    \"The main cause is burning fossil fuels\"\n",
+          "label": "You are a English teacher.\nYou privode the user a article and some questions to help the user grasp the main infomation of the article. Evaluate the user's answer to one of the questions about the article. If the user's answer is not related to the question or empty, score should be 0. Output a JSON object.  {\"score\": the score of the answer (0-10),  \"feedback\": a brief feedback to user's answer, \"improved\": the improved answer}.\nArticle: \n    {{title}}\n    {{article}}\nQuestions: \n    {{question}}\n\nUser's answer: \n    \"{{answer}}\"\n"
+        },
+        "promptId": "928527a92712370131fda159d2668e8264d4a54abdbd662baeb9bd50dd45e058",
+        "promptIdx": 0,
+        "provider": {
+          "id": "openai:gpt-4o",
+          "label": ""
+        },
+        "response": {
+          "output": "\n{\"score\": 8, \"feedback\": \"Your answer correctly identifies burning fossil fuels as a main cause, but it could be more detailed by also mentioning the greenhouse gases released.\", \"improved\": \"The main causes of climate change according to the article are the burning of fossil fuels such as coal, oil, and gas, which release greenhouse gases like carbon dioxide and methane into the atmosphere.\"}",
+          "tokenUsage": {
+            "cached": 321,
+            "total": 321
+          },
+          "cached": true,
+          "finishReason": "stop",
+          "cost": 0.0014100000000000002
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "vars": {
+            "title": "Global Climate Change: Causes and Effects",
+            "article": "Climate change refers to long-term shifts in global temperatures and weather patterns. While climate variations occur naturally, human activities have been the dominant driver since the 1800s, primarily due to the burning of fossil fuels like coal, oil, and gas. These activities release greenhouse gases such as carbon dioxide and methane, which trap heat in the atmosphere and cause global warming. The effects include rising sea levels, extreme weather events, and disruptions to ecosystems.",
+            "question": "What are the main causes of climate change according to the article?",
+            "answer": "The main cause is burning fossil fuels"
+          },
+          "assert": [
+            {
+              "type": "is-json"
+            },
+            {
+              "type": "javascript",
+              "value": "const parsed = JSON.parse(output);\nreturn parsed.hasOwnProperty('score') && \n       parsed.hasOwnProperty('feedback') && \n       parsed.hasOwnProperty('improved');\n"
+            },
+            {
+              "type": "is-json"
+            },
+            {
+              "type": "javascript",
+              "value": "const parsed = JSON.parse(output);\nreturn parsed.score >= 0 && parsed.score <= 10;\n"
+            },
+            {
+              "type": "javascript",
+              "value": "const parsed = JSON.parse(output);\nreturn parsed.feedback && parsed.feedback.length > 10;\n"
+            },
+            {
+              "type": "javascript",
+              "value": "const parsed = JSON.parse(output);\nreturn parsed.improved && parsed.improved.length > 10;\n"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 0,
+        "vars": {
+          "title": "Global Climate Change: Causes and Effects",
+          "article": "Climate change refers to long-term shifts in global temperatures and weather patterns. While climate variations occur naturally, human activities have been the dominant driver since the 1800s, primarily due to the burning of fossil fuels like coal, oil, and gas. These activities release greenhouse gases such as carbon dioxide and methane, which trap heat in the atmosphere and cause global warming. The effects include rising sea levels, extreme weather events, and disruptions to ecosystems.",
+          "question": "What are the main causes of climate change according to the article?",
+          "answer": "The main cause is burning fossil fuels"
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0.0015425,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "is-json"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "const parsed = JSON.parse(output);\nreturn parsed.hasOwnProperty('score') && \n       parsed.hasOwnProperty('feedback') && \n       parsed.hasOwnProperty('improved');\n"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "is-json"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "const parsed = JSON.parse(output);\nreturn parsed.score >= 0 && parsed.score <= 10;\n"
+              }
+            }
+          ],
+          "assertion": null
+        },
+        "id": "f52e794d-c627-4e79-9558-0b94d40b3826",
+        "latencyMs": 20,
+        "namedScores": {},
+        "prompt": {
+          "raw": "You are a English teacher.\nYou privode the user an article and some discussion questions related to this article. The questions is related to the article's topic to everyday life or personal experience, so it's easy for ESL students like me to talk about them in class. Evaluate the user's answer to one of the questions about the article. Output a JSON object. {\"score\": the score of the answer (0-10),  \"feedback\": a brief feedback to user's answer}, \"improved\": the improved answer.\nArticle: \n    Global Climate Change: Causes and Effects\n    Climate change refers to long-term shifts in global temperatures and weather patterns. While climate variations occur naturally, human activities have been the dominant driver since the 1800s, primarily due to the burning of fossil fuels like coal, oil, and gas. These activities release greenhouse gases such as carbon dioxide and methane, which trap heat in the atmosphere and cause global warming. The effects include rising sea levels, extreme weather events, and disruptions to ecosystems.\nQuestions: \n    How do you personally contribute to reducing climate change in your daily life?\n\nUser's answer:\n    \"I recycle sometimes and try to use less plastic bags when shopping\"\n",
+          "label": "You are a English teacher.\nYou privode the user an article and some discussion questions related to this article. The questions is related to the article's topic to everyday life or personal experience, so it's easy for ESL students like me to talk about them in class. Evaluate the user's answer to one of the questions about the article. Output a JSON object. {\"score\": the score of the answer (0-10),  \"feedback\": a brief feedback to user's answer}, \"improved\": the improved answer.\nArticle: \n    {{title}}\n    {{article}}\nQuestions: \n    {{question}}\n\nUser's answer:\n    \"{{answer}}\"\n"
+        },
+        "promptId": "a21aefadc5686273b93d96c4a55d63c1942f775e13bd695b30c3658e2a1715cc",
+        "promptIdx": 1,
+        "provider": {
+          "id": "openai:gpt-4o",
+          "label": ""
+        },
+        "response": {
+          "output": "{\"score\": 5, \"feedback\": \"The answer shows basic awareness of actions that reduce climate change but could be more detailed and include more actions.\", \"improved\": \"I make an effort to recycle regularly by separating paper, glass, and plastic waste. I also carry reusable shopping bags to minimize the use of plastic ones. Additionally, I try to conserve energy by turning off lights when not in use and reducing water consumption by taking shorter showers.\"}",
+          "tokenUsage": {
+            "cached": 341,
+            "total": 341
+          },
+          "cached": true,
+          "finishReason": "stop",
+          "cost": 0.0015425
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "vars": {
+            "title": "Global Climate Change: Causes and Effects",
+            "article": "Climate change refers to long-term shifts in global temperatures and weather patterns. While climate variations occur naturally, human activities have been the dominant driver since the 1800s, primarily due to the burning of fossil fuels like coal, oil, and gas. These activities release greenhouse gases such as carbon dioxide and methane, which trap heat in the atmosphere and cause global warming. The effects include rising sea levels, extreme weather events, and disruptions to ecosystems.",
+            "question": "How do you personally contribute to reducing climate change in your daily life?",
+            "answer": "I recycle sometimes and try to use less plastic bags when shopping"
+          },
+          "assert": [
+            {
+              "type": "is-json"
+            },
+            {
+              "type": "javascript",
+              "value": "const parsed = JSON.parse(output);\nreturn parsed.hasOwnProperty('score') && \n       parsed.hasOwnProperty('feedback') && \n       parsed.hasOwnProperty('improved');\n"
+            },
+            {
+              "type": "is-json"
+            },
+            {
+              "type": "javascript",
+              "value": "const parsed = JSON.parse(output);\nreturn parsed.score >= 0 && parsed.score <= 10;\n"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 1,
+        "vars": {
+          "title": "Global Climate Change: Causes and Effects",
+          "article": "Climate change refers to long-term shifts in global temperatures and weather patterns. While climate variations occur naturally, human activities have been the dominant driver since the 1800s, primarily due to the burning of fossil fuels like coal, oil, and gas. These activities release greenhouse gases such as carbon dioxide and methane, which trap heat in the atmosphere and cause global warming. The effects include rising sea levels, extreme weather events, and disruptions to ecosystems.",
+          "question": "How do you personally contribute to reducing climate change in your daily life?",
+          "answer": "I recycle sometimes and try to use less plastic bags when shopping"
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0.0014550000000000001,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "is-json"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "const parsed = JSON.parse(output);\nreturn parsed.hasOwnProperty('score') && \n       parsed.hasOwnProperty('feedback') && \n       parsed.hasOwnProperty('improved');\n"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "const parsed = JSON.parse(output);\nreturn parsed.score <= 3;\n"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "const parsed = JSON.parse(output);\nreturn parsed.feedback.toLowerCase().includes('specific') || parsed.feedback.toLowerCase().includes('detail');\n"
+              }
+            }
+          ],
+          "assertion": null
+        },
+        "id": "12e10271-44df-418f-bb33-f7631681d3cb",
+        "latencyMs": 5,
+        "namedScores": {},
+        "prompt": {
+          "raw": "You are a English teacher.\nYou privode the user a article and some questions to help the user grasp the main infomation of the article. Evaluate the user's answer to one of the questions about the article. If the user's answer is not related to the question or empty, score should be 0. Output a JSON object.  {\"score\": the score of the answer (0-10),  \"feedback\": a brief feedback to user's answer, \"improved\": the improved answer}.\nArticle: \n    The Impact of Artificial Intelligence on Education\n    Artificial Intelligence (AI) is revolutionizing education by providing personalized learning experiences, automating administrative tasks, and offering intelligent tutoring systems. AI can analyze student performance data to identify learning gaps and suggest targeted interventions. Virtual assistants can answer student questions 24/7, while automated grading systems save teachers valuable time. However, concerns about data privacy and the digital divide remain significant challenges.\nQuestions: \n    What are the benefits of AI in education mentioned in the article?\n\nUser's answer: \n    \"AI is good\"\n",
+          "label": "You are a English teacher.\nYou privode the user a article and some questions to help the user grasp the main infomation of the article. Evaluate the user's answer to one of the questions about the article. If the user's answer is not related to the question or empty, score should be 0. Output a JSON object.  {\"score\": the score of the answer (0-10),  \"feedback\": a brief feedback to user's answer, \"improved\": the improved answer}.\nArticle: \n    {{title}}\n    {{article}}\nQuestions: \n    {{question}}\n\nUser's answer: \n    \"{{answer}}\"\n"
+        },
+        "promptId": "928527a92712370131fda159d2668e8264d4a54abdbd662baeb9bd50dd45e058",
+        "promptIdx": 0,
+        "provider": {
+          "id": "openai:gpt-4o",
+          "label": ""
+        },
+        "response": {
+          "output": "{\"score\": 2, \"feedback\": \"Your answer is too vague and does not address the specific benefits of AI in education mentioned in the article. Try to include more details from the text.\", \"improved\": \"AI provides personalized learning experiences, automates administrative tasks, and offers intelligent tutoring systems. It can analyze student performance data to identify learning gaps and suggest targeted interventions, and virtual assistants can answer student questions 24/7.\"}",
+          "tokenUsage": {
+            "cached": 312,
+            "total": 312
+          },
+          "cached": true,
+          "finishReason": "stop",
+          "cost": 0.0014550000000000001
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "vars": {
+            "title": "The Impact of Artificial Intelligence on Education",
+            "article": "Artificial Intelligence (AI) is revolutionizing education by providing personalized learning experiences, automating administrative tasks, and offering intelligent tutoring systems. AI can analyze student performance data to identify learning gaps and suggest targeted interventions. Virtual assistants can answer student questions 24/7, while automated grading systems save teachers valuable time. However, concerns about data privacy and the digital divide remain significant challenges.",
+            "question": "What are the benefits of AI in education mentioned in the article?",
+            "answer": "AI is good"
+          },
+          "assert": [
+            {
+              "type": "is-json"
+            },
+            {
+              "type": "javascript",
+              "value": "const parsed = JSON.parse(output);\nreturn parsed.hasOwnProperty('score') && \n       parsed.hasOwnProperty('feedback') && \n       parsed.hasOwnProperty('improved');\n"
+            },
+            {
+              "type": "javascript",
+              "value": "const parsed = JSON.parse(output);\nreturn parsed.score <= 3;\n"
+            },
+            {
+              "type": "javascript",
+              "value": "const parsed = JSON.parse(output);\nreturn parsed.feedback.toLowerCase().includes('specific') || parsed.feedback.toLowerCase().includes('detail');\n"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 3,
+        "vars": {
+          "title": "The Impact of Artificial Intelligence on Education",
+          "article": "Artificial Intelligence (AI) is revolutionizing education by providing personalized learning experiences, automating administrative tasks, and offering intelligent tutoring systems. AI can analyze student performance data to identify learning gaps and suggest targeted interventions. Virtual assistants can answer student questions 24/7, while automated grading systems save teachers valuable time. However, concerns about data privacy and the digital divide remain significant challenges.",
+          "question": "What are the benefits of AI in education mentioned in the article?",
+          "answer": "AI is good"
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0.002755,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "is-json"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "const parsed = JSON.parse(output);\nreturn parsed.hasOwnProperty('score') && \n       parsed.hasOwnProperty('feedback') && \n       parsed.hasOwnProperty('improved');\n"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "const parsed = JSON.parse(output);\nreturn parsed.score >= 8;\n"
+              }
+            }
+          ],
+          "assertion": null
+        },
+        "id": "d6c70d63-2872-4e28-a39c-4f9ac7ffb920",
+        "latencyMs": 13,
+        "namedScores": {},
+        "prompt": {
+          "raw": "You are a English teacher.\nYou privode the user an article and some discussion questions related to this article. The questions is related to the article's topic to everyday life or personal experience, so it's easy for ESL students like me to talk about them in class. Evaluate the user's answer to one of the questions about the article. Output a JSON object. {\"score\": the score of the answer (0-10),  \"feedback\": a brief feedback to user's answer}, \"improved\": the improved answer.\nArticle: \n    The Impact of Artificial Intelligence on Education\n    Artificial Intelligence (AI) is revolutionizing education by providing personalized learning experiences, automating administrative tasks, and offering intelligent tutoring systems. AI can analyze student performance data to identify learning gaps and suggest targeted interventions. Virtual assistants can answer student questions 24/7, while automated grading systems save teachers valuable time. However, concerns about data privacy and the digital divide remain significant challenges.\nQuestions: \n    What are the benefits of AI in education mentioned in the article?\n\nUser's answer:\n    \"According to the article, AI benefits education in several ways: it provides personalized learning experiences tailored to individual students, automates time-consuming administrative tasks for educators, offers intelligent tutoring systems that can provide additional support, analyzes student performance data to identify learning gaps, provides 24/7 availability through virtual assistants, and saves teachers time through automated grading systems.\"\n",
+          "label": "You are a English teacher.\nYou privode the user an article and some discussion questions related to this article. The questions is related to the article's topic to everyday life or personal experience, so it's easy for ESL students like me to talk about them in class. Evaluate the user's answer to one of the questions about the article. Output a JSON object. {\"score\": the score of the answer (0-10),  \"feedback\": a brief feedback to user's answer}, \"improved\": the improved answer.\nArticle: \n    {{title}}\n    {{article}}\nQuestions: \n    {{question}}\n\nUser's answer:\n    \"{{answer}}\"\n"
+        },
+        "promptId": "a21aefadc5686273b93d96c4a55d63c1942f775e13bd695b30c3658e2a1715cc",
+        "promptIdx": 1,
+        "provider": {
+          "id": "openai:gpt-4o",
+          "label": ""
+        },
+        "response": {
+          "output": "{\"score\": 9, \"feedback\": \"This is a comprehensive answer, accurately listing the benefits discussed in the article. It demonstrates a clear understanding of the key points related to AI's positive impact on education. However, it could benefit from a bit more elaboration on each point to enhance clarity and depth.\", \"improved\": \"According to the article, AI benefits education in several ways: it provides personalized learning experiences tailored to individual students' needs and learning styles, thus enhancing understanding and retention. It also automates time-consuming administrative tasks for educators, allowing them to focus more on teaching and interacting with students. Moreover, AI offers intelligent tutoring systems that give students additional support outside of traditional classroom settings. By analyzing student performance data, AI identifies learning gaps effectively, suggesting targeted interventions for improvement. Virtual assistants provide 24/7 availability, ensuring students get responses to their queries anytime. Lastly, automated grading systems save teachers time, enabling them to spend more time developing lesson plans and evaluating student progress creatively.\"}",
+          "tokenUsage": {
+            "cached": 493,
+            "total": 493
+          },
+          "cached": true,
+          "finishReason": "stop",
+          "cost": 0.002755
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "vars": {
+            "title": "The Impact of Artificial Intelligence on Education",
+            "article": "Artificial Intelligence (AI) is revolutionizing education by providing personalized learning experiences, automating administrative tasks, and offering intelligent tutoring systems. AI can analyze student performance data to identify learning gaps and suggest targeted interventions. Virtual assistants can answer student questions 24/7, while automated grading systems save teachers valuable time. However, concerns about data privacy and the digital divide remain significant challenges.",
+            "question": "What are the benefits of AI in education mentioned in the article?",
+            "answer": "According to the article, AI benefits education in several ways: it provides personalized learning experiences tailored to individual students, automates time-consuming administrative tasks for educators, offers intelligent tutoring systems that can provide additional support, analyzes student performance data to identify learning gaps, provides 24/7 availability through virtual assistants, and saves teachers time through automated grading systems."
+          },
+          "assert": [
+            {
+              "type": "is-json"
+            },
+            {
+              "type": "javascript",
+              "value": "const parsed = JSON.parse(output);\nreturn parsed.hasOwnProperty('score') && \n       parsed.hasOwnProperty('feedback') && \n       parsed.hasOwnProperty('improved');\n"
+            },
+            {
+              "type": "javascript",
+              "value": "const parsed = JSON.parse(output);\nreturn parsed.score >= 8;\n"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 2,
+        "vars": {
+          "title": "The Impact of Artificial Intelligence on Education",
+          "article": "Artificial Intelligence (AI) is revolutionizing education by providing personalized learning experiences, automating administrative tasks, and offering intelligent tutoring systems. AI can analyze student performance data to identify learning gaps and suggest targeted interventions. Virtual assistants can answer student questions 24/7, while automated grading systems save teachers valuable time. However, concerns about data privacy and the digital divide remain significant challenges.",
+          "question": "What are the benefits of AI in education mentioned in the article?",
+          "answer": "According to the article, AI benefits education in several ways: it provides personalized learning experiences tailored to individual students, automates time-consuming administrative tasks for educators, offers intelligent tutoring systems that can provide additional support, analyzes student performance data to identify learning gaps, provides 24/7 availability through virtual assistants, and saves teachers time through automated grading systems."
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0.0017875,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "is-json"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "const parsed = JSON.parse(output);\nreturn parsed.hasOwnProperty('score') && \n       parsed.hasOwnProperty('feedback') && \n       parsed.hasOwnProperty('improved');\n"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "const parsed = JSON.parse(output);\nreturn parsed.score >= 8;\n"
+              }
+            }
+          ],
+          "assertion": null
+        },
+        "id": "a26ac0db-719f-4e4a-a12a-020855d14a61",
+        "latencyMs": 21,
+        "namedScores": {},
+        "prompt": {
+          "raw": "You are a English teacher.\nYou privode the user a article and some questions to help the user grasp the main infomation of the article. Evaluate the user's answer to one of the questions about the article. If the user's answer is not related to the question or empty, score should be 0. Output a JSON object.  {\"score\": the score of the answer (0-10),  \"feedback\": a brief feedback to user's answer, \"improved\": the improved answer}.\nArticle: \n    The Impact of Artificial Intelligence on Education\n    Artificial Intelligence (AI) is revolutionizing education by providing personalized learning experiences, automating administrative tasks, and offering intelligent tutoring systems. AI can analyze student performance data to identify learning gaps and suggest targeted interventions. Virtual assistants can answer student questions 24/7, while automated grading systems save teachers valuable time. However, concerns about data privacy and the digital divide remain significant challenges.\nQuestions: \n    What are the benefits of AI in education mentioned in the article?\n\nUser's answer: \n    \"According to the article, AI benefits education in several ways: it provides personalized learning experiences tailored to individual students, automates time-consuming administrative tasks for educators, offers intelligent tutoring systems that can provide additional support, analyzes student performance data to identify learning gaps, provides 24/7 availability through virtual assistants, and saves teachers time through automated grading systems.\"\n",
+          "label": "You are a English teacher.\nYou privode the user a article and some questions to help the user grasp the main infomation of the article. Evaluate the user's answer to one of the questions about the article. If the user's answer is not related to the question or empty, score should be 0. Output a JSON object.  {\"score\": the score of the answer (0-10),  \"feedback\": a brief feedback to user's answer, \"improved\": the improved answer}.\nArticle: \n    {{title}}\n    {{article}}\nQuestions: \n    {{question}}\n\nUser's answer: \n    \"{{answer}}\"\n"
+        },
+        "promptId": "928527a92712370131fda159d2668e8264d4a54abdbd662baeb9bd50dd45e058",
+        "promptIdx": 0,
+        "provider": {
+          "id": "openai:gpt-4o",
+          "label": ""
+        },
+        "response": {
+          "output": "{\"score\": 10, \"feedback\": \"Great job! Your answer is comprehensive and accurately captures all the benefits of AI in education mentioned in the article.\", \"improved\": \"According to the article, AI benefits education in several ways: it provides personalized learning experiences tailored to individual students, automates time-consuming administrative tasks for educators, offers intelligent tutoring systems that can provide additional support, analyzes student performance data to identify learning gaps, provides 24/7 availability through virtual assistants, and saves teachers time through automated grading systems.\"}",
+          "tokenUsage": {
+            "cached": 394,
+            "total": 394
+          },
+          "cached": true,
+          "finishReason": "stop",
+          "cost": 0.0017875
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "vars": {
+            "title": "The Impact of Artificial Intelligence on Education",
+            "article": "Artificial Intelligence (AI) is revolutionizing education by providing personalized learning experiences, automating administrative tasks, and offering intelligent tutoring systems. AI can analyze student performance data to identify learning gaps and suggest targeted interventions. Virtual assistants can answer student questions 24/7, while automated grading systems save teachers valuable time. However, concerns about data privacy and the digital divide remain significant challenges.",
+            "question": "What are the benefits of AI in education mentioned in the article?",
+            "answer": "According to the article, AI benefits education in several ways: it provides personalized learning experiences tailored to individual students, automates time-consuming administrative tasks for educators, offers intelligent tutoring systems that can provide additional support, analyzes student performance data to identify learning gaps, provides 24/7 availability through virtual assistants, and saves teachers time through automated grading systems."
+          },
+          "assert": [
+            {
+              "type": "is-json"
+            },
+            {
+              "type": "javascript",
+              "value": "const parsed = JSON.parse(output);\nreturn parsed.hasOwnProperty('score') && \n       parsed.hasOwnProperty('feedback') && \n       parsed.hasOwnProperty('improved');\n"
+            },
+            {
+              "type": "javascript",
+              "value": "const parsed = JSON.parse(output);\nreturn parsed.score >= 8;\n"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 2,
+        "vars": {
+          "title": "The Impact of Artificial Intelligence on Education",
+          "article": "Artificial Intelligence (AI) is revolutionizing education by providing personalized learning experiences, automating administrative tasks, and offering intelligent tutoring systems. AI can analyze student performance data to identify learning gaps and suggest targeted interventions. Virtual assistants can answer student questions 24/7, while automated grading systems save teachers valuable time. However, concerns about data privacy and the digital divide remain significant challenges.",
+          "question": "What are the benefits of AI in education mentioned in the article?",
+          "answer": "According to the article, AI benefits education in several ways: it provides personalized learning experiences tailored to individual students, automates time-consuming administrative tasks for educators, offers intelligent tutoring systems that can provide additional support, analyzes student performance data to identify learning gaps, provides 24/7 availability through virtual assistants, and saves teachers time through automated grading systems."
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0.0015625,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "is-json"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "const parsed = JSON.parse(output);\nreturn parsed.hasOwnProperty('score') && \n       parsed.hasOwnProperty('feedback') && \n       parsed.hasOwnProperty('improved');\n"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "const parsed = JSON.parse(output);\nreturn parsed.score <= 3;\n"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "const parsed = JSON.parse(output);\nreturn parsed.feedback.toLowerCase().includes('specific') || parsed.feedback.toLowerCase().includes('detail');\n"
+              }
+            }
+          ],
+          "assertion": null
+        },
+        "id": "4b33f1c7-a9e5-4481-a024-2c0e6e44663d",
+        "latencyMs": 13,
+        "namedScores": {},
+        "prompt": {
+          "raw": "You are a English teacher.\nYou privode the user an article and some discussion questions related to this article. The questions is related to the article's topic to everyday life or personal experience, so it's easy for ESL students like me to talk about them in class. Evaluate the user's answer to one of the questions about the article. Output a JSON object. {\"score\": the score of the answer (0-10),  \"feedback\": a brief feedback to user's answer}, \"improved\": the improved answer.\nArticle: \n    The Impact of Artificial Intelligence on Education\n    Artificial Intelligence (AI) is revolutionizing education by providing personalized learning experiences, automating administrative tasks, and offering intelligent tutoring systems. AI can analyze student performance data to identify learning gaps and suggest targeted interventions. Virtual assistants can answer student questions 24/7, while automated grading systems save teachers valuable time. However, concerns about data privacy and the digital divide remain significant challenges.\nQuestions: \n    What are the benefits of AI in education mentioned in the article?\n\nUser's answer:\n    \"AI is good\"\n",
+          "label": "You are a English teacher.\nYou privode the user an article and some discussion questions related to this article. The questions is related to the article's topic to everyday life or personal experience, so it's easy for ESL students like me to talk about them in class. Evaluate the user's answer to one of the questions about the article. Output a JSON object. {\"score\": the score of the answer (0-10),  \"feedback\": a brief feedback to user's answer}, \"improved\": the improved answer.\nArticle: \n    {{title}}\n    {{article}}\nQuestions: \n    {{question}}\n\nUser's answer:\n    \"{{answer}}\"\n"
+        },
+        "promptId": "a21aefadc5686273b93d96c4a55d63c1942f775e13bd695b30c3658e2a1715cc",
+        "promptIdx": 1,
+        "provider": {
+          "id": "openai:gpt-4o",
+          "label": ""
+        },
+        "response": {
+          "output": "{\"score\": 2, \"feedback\": \"The answer is too vague and lacks detail. It does not mention the specific benefits of AI in education as discussed in the article.\", \"improved\": \"AI offers several benefits in education, such as personalized learning experiences, automating administrative tasks, and providing intelligent tutoring systems. It helps by analyzing student performance data to identify learning gaps and suggest interventions, while virtual assistants can support students 24/7 and automated grading systems save teachers' time.\"}",
+          "tokenUsage": {
+            "cached": 325,
+            "total": 325
+          },
+          "cached": true,
+          "finishReason": "stop",
+          "cost": 0.0015625
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "vars": {
+            "title": "The Impact of Artificial Intelligence on Education",
+            "article": "Artificial Intelligence (AI) is revolutionizing education by providing personalized learning experiences, automating administrative tasks, and offering intelligent tutoring systems. AI can analyze student performance data to identify learning gaps and suggest targeted interventions. Virtual assistants can answer student questions 24/7, while automated grading systems save teachers valuable time. However, concerns about data privacy and the digital divide remain significant challenges.",
+            "question": "What are the benefits of AI in education mentioned in the article?",
+            "answer": "AI is good"
+          },
+          "assert": [
+            {
+              "type": "is-json"
+            },
+            {
+              "type": "javascript",
+              "value": "const parsed = JSON.parse(output);\nreturn parsed.hasOwnProperty('score') && \n       parsed.hasOwnProperty('feedback') && \n       parsed.hasOwnProperty('improved');\n"
+            },
+            {
+              "type": "javascript",
+              "value": "const parsed = JSON.parse(output);\nreturn parsed.score <= 3;\n"
+            },
+            {
+              "type": "javascript",
+              "value": "const parsed = JSON.parse(output);\nreturn parsed.feedback.toLowerCase().includes('specific') || parsed.feedback.toLowerCase().includes('detail');\n"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 3,
+        "vars": {
+          "title": "The Impact of Artificial Intelligence on Education",
+          "article": "Artificial Intelligence (AI) is revolutionizing education by providing personalized learning experiences, automating administrative tasks, and offering intelligent tutoring systems. AI can analyze student performance data to identify learning gaps and suggest targeted interventions. Virtual assistants can answer student questions 24/7, while automated grading systems save teachers valuable time. However, concerns about data privacy and the digital divide remain significant challenges.",
+          "question": "What are the benefits of AI in education mentioned in the article?",
+          "answer": "AI is good"
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0.0015075000000000002,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "is-json"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "const parsed = JSON.parse(output);\nreturn parsed.hasOwnProperty('score') && \n       parsed.hasOwnProperty('feedback') && \n       parsed.hasOwnProperty('improved');\n"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "const parsed = JSON.parse(output);\nreturn parsed.feedback.toLowerCase().includes('gramma');\n"
+              }
+            }
+          ],
+          "assertion": null
+        },
+        "id": "02327989-7a30-446d-a0d7-3473fda65cf1",
+        "latencyMs": 14,
+        "namedScores": {},
+        "prompt": {
+          "raw": "You are a English teacher.\nYou privode the user a article and some questions to help the user grasp the main infomation of the article. Evaluate the user's answer to one of the questions about the article. If the user's answer is not related to the question or empty, score should be 0. Output a JSON object.  {\"score\": the score of the answer (0-10),  \"feedback\": a brief feedback to user's answer, \"improved\": the improved answer}.\nArticle: \n    The Importance of Sleep for Mental Health\n    Sleep plays a crucial role in maintaining good mental health. During sleep, the brain processes emotions and consolidates memories. Lack of sleep can lead to increased stress, anxiety, and depression. Adults should aim for 7-9 hours of quality sleep per night. Good sleep hygiene includes maintaining a regular sleep schedule, avoiding screens before bedtime, and creating a comfortable sleep environment.\nQuestions: \n    Why is sleep important for mental health?\n\nUser's answer: \n    \"Sleep are very important because brain need rest and when no sleep people feeling bad and stress more. Also memory not work good without sleeps.\"\n",
+          "label": "You are a English teacher.\nYou privode the user a article and some questions to help the user grasp the main infomation of the article. Evaluate the user's answer to one of the questions about the article. If the user's answer is not related to the question or empty, score should be 0. Output a JSON object.  {\"score\": the score of the answer (0-10),  \"feedback\": a brief feedback to user's answer, \"improved\": the improved answer}.\nArticle: \n    {{title}}\n    {{article}}\nQuestions: \n    {{question}}\n\nUser's answer: \n    \"{{answer}}\"\n"
+        },
+        "promptId": "928527a92712370131fda159d2668e8264d4a54abdbd662baeb9bd50dd45e058",
+        "promptIdx": 0,
+        "provider": {
+          "id": "openai:gpt-4o",
+          "label": ""
+        },
+        "response": {
+          "output": "\n{\"score\": 6, \"feedback\": \"The answer demonstrates an understanding that sleep is important for mental health because it allows the brain to rest and affects emotions and memory. However, there are grammatical errors and some areas needing more clarity.\", \"improved\": \"Sleep is very important because the brain needs rest to process emotions and consolidate memories. Without enough sleep, people can feel more stressed and anxious, and their memory may not function well.\"}",
+          "tokenUsage": {
+            "cached": 330,
+            "total": 330
+          },
+          "cached": true,
+          "finishReason": "stop",
+          "cost": 0.0015075000000000002
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "vars": {
+            "title": "The Importance of Sleep for Mental Health",
+            "article": "Sleep plays a crucial role in maintaining good mental health. During sleep, the brain processes emotions and consolidates memories. Lack of sleep can lead to increased stress, anxiety, and depression. Adults should aim for 7-9 hours of quality sleep per night. Good sleep hygiene includes maintaining a regular sleep schedule, avoiding screens before bedtime, and creating a comfortable sleep environment.",
+            "question": "Why is sleep important for mental health?",
+            "answer": "Sleep are very important because brain need rest and when no sleep people feeling bad and stress more. Also memory not work good without sleeps."
+          },
+          "assert": [
+            {
+              "type": "is-json"
+            },
+            {
+              "type": "javascript",
+              "value": "const parsed = JSON.parse(output);\nreturn parsed.hasOwnProperty('score') && \n       parsed.hasOwnProperty('feedback') && \n       parsed.hasOwnProperty('improved');\n"
+            },
+            {
+              "type": "javascript",
+              "value": "const parsed = JSON.parse(output);\nreturn parsed.feedback.toLowerCase().includes('gramma');\n"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 4,
+        "vars": {
+          "title": "The Importance of Sleep for Mental Health",
+          "article": "Sleep plays a crucial role in maintaining good mental health. During sleep, the brain processes emotions and consolidates memories. Lack of sleep can lead to increased stress, anxiety, and depression. Adults should aim for 7-9 hours of quality sleep per night. Good sleep hygiene includes maintaining a regular sleep schedule, avoiding screens before bedtime, and creating a comfortable sleep environment.",
+          "question": "Why is sleep important for mental health?",
+          "answer": "Sleep are very important because brain need rest and when no sleep people feeling bad and stress more. Also memory not work good without sleeps."
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0.0015050000000000003,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "is-json"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "const parsed = JSON.parse(output);\nreturn parsed.hasOwnProperty('score') && \n       parsed.hasOwnProperty('feedback') && \n       parsed.hasOwnProperty('improved');\n"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "const parsed = JSON.parse(output);\nreturn parsed.feedback.toLowerCase().includes('gramma');\n"
+              }
+            }
+          ],
+          "assertion": null
+        },
+        "id": "5b3baa2d-5421-4007-8547-e82584d6390e",
+        "latencyMs": 16,
+        "namedScores": {},
+        "prompt": {
+          "raw": "You are a English teacher.\nYou privode the user an article and some discussion questions related to this article. The questions is related to the article's topic to everyday life or personal experience, so it's easy for ESL students like me to talk about them in class. Evaluate the user's answer to one of the questions about the article. Output a JSON object. {\"score\": the score of the answer (0-10),  \"feedback\": a brief feedback to user's answer}, \"improved\": the improved answer.\nArticle: \n    The Importance of Sleep for Mental Health\n    Sleep plays a crucial role in maintaining good mental health. During sleep, the brain processes emotions and consolidates memories. Lack of sleep can lead to increased stress, anxiety, and depression. Adults should aim for 7-9 hours of quality sleep per night. Good sleep hygiene includes maintaining a regular sleep schedule, avoiding screens before bedtime, and creating a comfortable sleep environment.\nQuestions: \n    Why is sleep important for mental health?\n\nUser's answer:\n    \"Sleep are very important because brain need rest and when no sleep people feeling bad and stress more. Also memory not work good without sleeps.\"\n",
+          "label": "You are a English teacher.\nYou privode the user an article and some discussion questions related to this article. The questions is related to the article's topic to everyday life or personal experience, so it's easy for ESL students like me to talk about them in class. Evaluate the user's answer to one of the questions about the article. Output a JSON object. {\"score\": the score of the answer (0-10),  \"feedback\": a brief feedback to user's answer}, \"improved\": the improved answer.\nArticle: \n    {{title}}\n    {{article}}\nQuestions: \n    {{question}}\n\nUser's answer:\n    \"{{answer}}\"\n"
+        },
+        "promptId": "a21aefadc5686273b93d96c4a55d63c1942f775e13bd695b30c3658e2a1715cc",
+        "promptIdx": 1,
+        "provider": {
+          "id": "openai:gpt-4o",
+          "label": ""
+        },
+        "response": {
+          "output": "{\"score\": 5, \"feedback\": \"Your answer covers the main points about the importance of sleep for mental health, such as the brain needing rest and the effects on memory and stress. However, there are some grammatical errors and the explanation can be expanded for clarity.\", \"improved\": \"Sleep is very important because the brain needs rest. Without enough sleep, people can feel bad, experience more stress, and have difficulties with memory.\"}",
+          "tokenUsage": {
+            "cached": 332,
+            "total": 332
+          },
+          "cached": true,
+          "finishReason": "stop",
+          "cost": 0.0015050000000000003
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "vars": {
+            "title": "The Importance of Sleep for Mental Health",
+            "article": "Sleep plays a crucial role in maintaining good mental health. During sleep, the brain processes emotions and consolidates memories. Lack of sleep can lead to increased stress, anxiety, and depression. Adults should aim for 7-9 hours of quality sleep per night. Good sleep hygiene includes maintaining a regular sleep schedule, avoiding screens before bedtime, and creating a comfortable sleep environment.",
+            "question": "Why is sleep important for mental health?",
+            "answer": "Sleep are very important because brain need rest and when no sleep people feeling bad and stress more. Also memory not work good without sleeps."
+          },
+          "assert": [
+            {
+              "type": "is-json"
+            },
+            {
+              "type": "javascript",
+              "value": "const parsed = JSON.parse(output);\nreturn parsed.hasOwnProperty('score') && \n       parsed.hasOwnProperty('feedback') && \n       parsed.hasOwnProperty('improved');\n"
+            },
+            {
+              "type": "javascript",
+              "value": "const parsed = JSON.parse(output);\nreturn parsed.feedback.toLowerCase().includes('gramma');\n"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 4,
+        "vars": {
+          "title": "The Importance of Sleep for Mental Health",
+          "article": "Sleep plays a crucial role in maintaining good mental health. During sleep, the brain processes emotions and consolidates memories. Lack of sleep can lead to increased stress, anxiety, and depression. Adults should aim for 7-9 hours of quality sleep per night. Good sleep hygiene includes maintaining a regular sleep schedule, avoiding screens before bedtime, and creating a comfortable sleep environment.",
+          "question": "Why is sleep important for mental health?",
+          "answer": "Sleep are very important because brain need rest and when no sleep people feeling bad and stress more. Also memory not work good without sleeps."
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0.0010700000000000002,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "is-json"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "const parsed = JSON.parse(output);\nreturn parsed.hasOwnProperty('score') && \n       parsed.hasOwnProperty('feedback') && \n       parsed.hasOwnProperty('improved');\n"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "is-json"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "const parsed = JSON.parse(output);\nreturn parsed.score === 0;\n"
+              }
+            }
+          ],
+          "assertion": null
+        },
+        "id": "5642966d-5231-4596-bb51-234d3cdcff4e",
+        "latencyMs": 7,
+        "namedScores": {},
+        "prompt": {
+          "raw": "You are a English teacher.\nYou privode the user a article and some questions to help the user grasp the main infomation of the article. Evaluate the user's answer to one of the questions about the article. If the user's answer is not related to the question or empty, score should be 0. Output a JSON object.  {\"score\": the score of the answer (0-10),  \"feedback\": a brief feedback to user's answer, \"improved\": the improved answer}.\nArticle: \n    Renewable Energy Sources\n    Renewable energy comes from natural sources that replenish themselves, including solar, wind, hydroelectric, and geothermal power. These sources produce little to no greenhouse gas emissions and help combat climate change. Solar panels convert sunlight into electricity, while wind turbines harness wind power. Despite higher initial costs, renewable energy is becoming increasingly cost-competitive with fossil fuels.\nQuestions: \n    What are the main types of renewable energy mentioned?\n\nUser's answer: \n    \"\"\n",
+          "label": "You are a English teacher.\nYou privode the user a article and some questions to help the user grasp the main infomation of the article. Evaluate the user's answer to one of the questions about the article. If the user's answer is not related to the question or empty, score should be 0. Output a JSON object.  {\"score\": the score of the answer (0-10),  \"feedback\": a brief feedback to user's answer, \"improved\": the improved answer}.\nArticle: \n    {{title}}\n    {{article}}\nQuestions: \n    {{question}}\n\nUser's answer: \n    \"{{answer}}\"\n"
+        },
+        "promptId": "928527a92712370131fda159d2668e8264d4a54abdbd662baeb9bd50dd45e058",
+        "promptIdx": 0,
+        "provider": {
+          "id": "openai:gpt-4o",
+          "label": ""
+        },
+        "response": {
+          "output": "{\"score\": 0, \"feedback\": \"The answer is empty. Please provide information related to the main types of renewable energy mentioned in the article.\", \"improved\": \"The main types of renewable energy mentioned are solar, wind, hydroelectric, and geothermal power.\"}",
+          "tokenUsage": {
+            "cached": 260,
+            "total": 260
+          },
+          "cached": true,
+          "finishReason": "stop",
+          "cost": 0.0010700000000000002
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "vars": {
+            "title": "Renewable Energy Sources",
+            "article": "Renewable energy comes from natural sources that replenish themselves, including solar, wind, hydroelectric, and geothermal power. These sources produce little to no greenhouse gas emissions and help combat climate change. Solar panels convert sunlight into electricity, while wind turbines harness wind power. Despite higher initial costs, renewable energy is becoming increasingly cost-competitive with fossil fuels.",
+            "question": "What are the main types of renewable energy mentioned?",
+            "answer": ""
+          },
+          "assert": [
+            {
+              "type": "is-json"
+            },
+            {
+              "type": "javascript",
+              "value": "const parsed = JSON.parse(output);\nreturn parsed.hasOwnProperty('score') && \n       parsed.hasOwnProperty('feedback') && \n       parsed.hasOwnProperty('improved');\n"
+            },
+            {
+              "type": "is-json"
+            },
+            {
+              "type": "javascript",
+              "value": "const parsed = JSON.parse(output);\nreturn parsed.score === 0;\n"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 6,
+        "vars": {
+          "title": "Renewable Energy Sources",
+          "article": "Renewable energy comes from natural sources that replenish themselves, including solar, wind, hydroelectric, and geothermal power. These sources produce little to no greenhouse gas emissions and help combat climate change. Solar panels convert sunlight into electricity, while wind turbines harness wind power. Despite higher initial costs, renewable energy is becoming increasingly cost-competitive with fossil fuels.",
+          "question": "What are the main types of renewable energy mentioned?",
+          "answer": ""
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0.0011575000000000001,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "is-json"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "const parsed = JSON.parse(output);\nreturn parsed.hasOwnProperty('score') && \n       parsed.hasOwnProperty('feedback') && \n       parsed.hasOwnProperty('improved');\n"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "is-json"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "const parsed = JSON.parse(output);\nreturn parsed.score === 0;\n"
+              }
+            }
+          ],
+          "assertion": null
+        },
+        "id": "53b86a02-43b3-4c47-8c06-a5816f6245a1",
+        "latencyMs": 7,
+        "namedScores": {},
+        "prompt": {
+          "raw": "You are a English teacher.\nYou privode the user an article and some discussion questions related to this article. The questions is related to the article's topic to everyday life or personal experience, so it's easy for ESL students like me to talk about them in class. Evaluate the user's answer to one of the questions about the article. Output a JSON object. {\"score\": the score of the answer (0-10),  \"feedback\": a brief feedback to user's answer}, \"improved\": the improved answer.\nArticle: \n    Renewable Energy Sources\n    Renewable energy comes from natural sources that replenish themselves, including solar, wind, hydroelectric, and geothermal power. These sources produce little to no greenhouse gas emissions and help combat climate change. Solar panels convert sunlight into electricity, while wind turbines harness wind power. Despite higher initial costs, renewable energy is becoming increasingly cost-competitive with fossil fuels.\nQuestions: \n    What are the main types of renewable energy mentioned?\n\nUser's answer:\n    \"\"\n",
+          "label": "You are a English teacher.\nYou privode the user an article and some discussion questions related to this article. The questions is related to the article's topic to everyday life or personal experience, so it's easy for ESL students like me to talk about them in class. Evaluate the user's answer to one of the questions about the article. Output a JSON object. {\"score\": the score of the answer (0-10),  \"feedback\": a brief feedback to user's answer}, \"improved\": the improved answer.\nArticle: \n    {{title}}\n    {{article}}\nQuestions: \n    {{question}}\n\nUser's answer:\n    \"{{answer}}\"\n"
+        },
+        "promptId": "a21aefadc5686273b93d96c4a55d63c1942f775e13bd695b30c3658e2a1715cc",
+        "promptIdx": 1,
+        "provider": {
+          "id": "openai:gpt-4o",
+          "label": ""
+        },
+        "response": {
+          "output": "{\n  \"score\": 0,\n  \"feedback\": \"It seems you haven't provided an answer. Please try to answer the question based on the information from the article.\",\n  \"improved\": \"The main types of renewable energy mentioned in the article are solar, wind, hydroelectric, and geothermal power.\"\n}",
+          "tokenUsage": {
+            "cached": 271,
+            "total": 271
+          },
+          "cached": true,
+          "finishReason": "stop",
+          "cost": 0.0011575000000000001
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "vars": {
+            "title": "Renewable Energy Sources",
+            "article": "Renewable energy comes from natural sources that replenish themselves, including solar, wind, hydroelectric, and geothermal power. These sources produce little to no greenhouse gas emissions and help combat climate change. Solar panels convert sunlight into electricity, while wind turbines harness wind power. Despite higher initial costs, renewable energy is becoming increasingly cost-competitive with fossil fuels.",
+            "question": "What are the main types of renewable energy mentioned?",
+            "answer": ""
+          },
+          "assert": [
+            {
+              "type": "is-json"
+            },
+            {
+              "type": "javascript",
+              "value": "const parsed = JSON.parse(output);\nreturn parsed.hasOwnProperty('score') && \n       parsed.hasOwnProperty('feedback') && \n       parsed.hasOwnProperty('improved');\n"
+            },
+            {
+              "type": "is-json"
+            },
+            {
+              "type": "javascript",
+              "value": "const parsed = JSON.parse(output);\nreturn parsed.score === 0;\n"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 6,
+        "vars": {
+          "title": "Renewable Energy Sources",
+          "article": "Renewable energy comes from natural sources that replenish themselves, including solar, wind, hydroelectric, and geothermal power. These sources produce little to no greenhouse gas emissions and help combat climate change. Solar panels convert sunlight into electricity, while wind turbines harness wind power. Despite higher initial costs, renewable energy is becoming increasingly cost-competitive with fossil fuels.",
+          "question": "What are the main types of renewable energy mentioned?",
+          "answer": ""
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0.0013800000000000002,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 319,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 319
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "is-json"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "const parsed = JSON.parse(output);\nreturn parsed.hasOwnProperty('score') && \n       parsed.hasOwnProperty('feedback') && \n       parsed.hasOwnProperty('improved');\n"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "const parsed = JSON.parse(output);\nreturn parsed.score <= 2;\n"
+              }
+            },
+            {
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "answer is not relevant to the question;"
+              },
+              "pass": true,
+              "score": 1,
+              "reason": "The feedback states that the answer shared a personal experience about enjoying the beach and did not address the question about types of ocean pollution mentioned in the article, thus the answer is not relevant to the question.",
+              "tokensUsed": {
+                "total": 319,
+                "prompt": 0,
+                "completion": 0,
+                "cached": 319,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              }
+            }
+          ],
+          "assertion": null
+        },
+        "id": "d75c7fe3-fb57-4b0e-9fae-d2109637283a",
+        "latencyMs": 12,
+        "namedScores": {},
+        "prompt": {
+          "raw": "You are a English teacher.\nYou privode the user an article and some discussion questions related to this article. The questions is related to the article's topic to everyday life or personal experience, so it's easy for ESL students like me to talk about them in class. Evaluate the user's answer to one of the questions about the article. Output a JSON object. {\"score\": the score of the answer (0-10),  \"feedback\": a brief feedback to user's answer}, \"improved\": the improved answer.\nArticle: \n    Ocean Pollution and Marine Life\n    Ocean pollution poses a severe threat to marine ecosystems. Plastic waste, chemical runoff, and oil spills contaminate ocean waters, harming sea creatures and disrupting food chains. Microplastics are particularly dangerous as they are consumed by small organisms and accumulate up the food chain. Conservation efforts include reducing plastic use, improving waste management, and establishing marine protected areas.\nQuestions: \n    What are the main types of ocean pollution mentioned?\n\nUser's answer:\n    \"I love going to the beach in summer. The water is usually warm and I enjoy swimming with my friends.\"\n",
+          "label": "You are a English teacher.\nYou privode the user an article and some discussion questions related to this article. The questions is related to the article's topic to everyday life or personal experience, so it's easy for ESL students like me to talk about them in class. Evaluate the user's answer to one of the questions about the article. Output a JSON object. {\"score\": the score of the answer (0-10),  \"feedback\": a brief feedback to user's answer}, \"improved\": the improved answer.\nArticle: \n    {{title}}\n    {{article}}\nQuestions: \n    {{question}}\n\nUser's answer:\n    \"{{answer}}\"\n"
+        },
+        "promptId": "a21aefadc5686273b93d96c4a55d63c1942f775e13bd695b30c3658e2a1715cc",
+        "promptIdx": 1,
+        "provider": {
+          "id": "openai:gpt-4o",
+          "label": ""
+        },
+        "response": {
+          "output": "{\"score\": 2, \"feedback\": \"While your answer shares a personal experience related to enjoying the beach, it does not address the question about types of ocean pollution mentioned in the article. Be sure to focus on the specific details from the article when answering.\", \"improved\": \"The main types of ocean pollution mentioned in the article are plastic waste, chemical runoff, and oil spills.\"}",
+          "tokenUsage": {
+            "cached": 312,
+            "total": 312
+          },
+          "cached": true,
+          "finishReason": "stop",
+          "cost": 0.0013800000000000002
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "vars": {
+            "title": "Ocean Pollution and Marine Life",
+            "article": "Ocean pollution poses a severe threat to marine ecosystems. Plastic waste, chemical runoff, and oil spills contaminate ocean waters, harming sea creatures and disrupting food chains. Microplastics are particularly dangerous as they are consumed by small organisms and accumulate up the food chain. Conservation efforts include reducing plastic use, improving waste management, and establishing marine protected areas.",
+            "question": "What are the main types of ocean pollution mentioned?",
+            "answer": "I love going to the beach in summer. The water is usually warm and I enjoy swimming with my friends."
+          },
+          "assert": [
+            {
+              "type": "is-json"
+            },
+            {
+              "type": "javascript",
+              "value": "const parsed = JSON.parse(output);\nreturn parsed.hasOwnProperty('score') && \n       parsed.hasOwnProperty('feedback') && \n       parsed.hasOwnProperty('improved');\n"
+            },
+            {
+              "type": "javascript",
+              "value": "const parsed = JSON.parse(output);\nreturn parsed.score <= 2;\n"
+            },
+            {
+              "type": "llm-rubric",
+              "value": "answer is not relevant to the question;"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 5,
+        "vars": {
+          "title": "Ocean Pollution and Marine Life",
+          "article": "Ocean pollution poses a severe threat to marine ecosystems. Plastic waste, chemical runoff, and oil spills contaminate ocean waters, harming sea creatures and disrupting food chains. Microplastics are particularly dangerous as they are consumed by small organisms and accumulate up the food chain. Conservation efforts include reducing plastic use, improving waste management, and establishing marine protected areas.",
+          "question": "What are the main types of ocean pollution mentioned?",
+          "answer": "I love going to the beach in summer. The water is usually warm and I enjoy swimming with my friends."
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0.0012525000000000001,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 297,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 297
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "is-json"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "const parsed = JSON.parse(output);\nreturn parsed.hasOwnProperty('score') && \n       parsed.hasOwnProperty('feedback') && \n       parsed.hasOwnProperty('improved');\n"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "const parsed = JSON.parse(output);\nreturn parsed.score <= 2;\n"
+              }
+            },
+            {
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "answer is not relevant to the question;"
+              },
+              "pass": true,
+              "score": 1,
+              "reason": "The output states that the answer does not address the question and is unrelated to the topic, which matches the rubric criterion that the answer is not relevant.",
+              "tokensUsed": {
+                "total": 297,
+                "prompt": 0,
+                "completion": 0,
+                "cached": 297,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              }
+            }
+          ],
+          "assertion": null
+        },
+        "id": "a587e7b0-9a1c-4500-89b1-edef6abb5156",
+        "latencyMs": 15,
+        "namedScores": {},
+        "prompt": {
+          "raw": "You are a English teacher.\nYou privode the user a article and some questions to help the user grasp the main infomation of the article. Evaluate the user's answer to one of the questions about the article. If the user's answer is not related to the question or empty, score should be 0. Output a JSON object.  {\"score\": the score of the answer (0-10),  \"feedback\": a brief feedback to user's answer, \"improved\": the improved answer}.\nArticle: \n    Ocean Pollution and Marine Life\n    Ocean pollution poses a severe threat to marine ecosystems. Plastic waste, chemical runoff, and oil spills contaminate ocean waters, harming sea creatures and disrupting food chains. Microplastics are particularly dangerous as they are consumed by small organisms and accumulate up the food chain. Conservation efforts include reducing plastic use, improving waste management, and establishing marine protected areas.\nQuestions: \n    What are the main types of ocean pollution mentioned?\n\nUser's answer: \n    \"I love going to the beach in summer. The water is usually warm and I enjoy swimming with my friends.\"\n",
+          "label": "You are a English teacher.\nYou privode the user a article and some questions to help the user grasp the main infomation of the article. Evaluate the user's answer to one of the questions about the article. If the user's answer is not related to the question or empty, score should be 0. Output a JSON object.  {\"score\": the score of the answer (0-10),  \"feedback\": a brief feedback to user's answer, \"improved\": the improved answer}.\nArticle: \n    {{title}}\n    {{article}}\nQuestions: \n    {{question}}\n\nUser's answer: \n    \"{{answer}}\"\n"
+        },
+        "promptId": "928527a92712370131fda159d2668e8264d4a54abdbd662baeb9bd50dd45e058",
+        "promptIdx": 0,
+        "provider": {
+          "id": "openai:gpt-4o",
+          "label": ""
+        },
+        "response": {
+          "output": "{\"score\": 0, \"feedback\": \"Your answer does not address the question about the main types of ocean pollution mentioned in the article. It is unrelated to the topic discussed.\", \"improved\": \"The main types of ocean pollution mentioned in the article are plastic waste, chemical runoff, oil spills, and microplastics.\"}",
+          "tokenUsage": {
+            "cached": 297,
+            "total": 297
+          },
+          "cached": true,
+          "finishReason": "stop",
+          "cost": 0.0012525000000000001
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "vars": {
+            "title": "Ocean Pollution and Marine Life",
+            "article": "Ocean pollution poses a severe threat to marine ecosystems. Plastic waste, chemical runoff, and oil spills contaminate ocean waters, harming sea creatures and disrupting food chains. Microplastics are particularly dangerous as they are consumed by small organisms and accumulate up the food chain. Conservation efforts include reducing plastic use, improving waste management, and establishing marine protected areas.",
+            "question": "What are the main types of ocean pollution mentioned?",
+            "answer": "I love going to the beach in summer. The water is usually warm and I enjoy swimming with my friends."
+          },
+          "assert": [
+            {
+              "type": "is-json"
+            },
+            {
+              "type": "javascript",
+              "value": "const parsed = JSON.parse(output);\nreturn parsed.hasOwnProperty('score') && \n       parsed.hasOwnProperty('feedback') && \n       parsed.hasOwnProperty('improved');\n"
+            },
+            {
+              "type": "javascript",
+              "value": "const parsed = JSON.parse(output);\nreturn parsed.score <= 2;\n"
+            },
+            {
+              "type": "llm-rubric",
+              "value": "answer is not relevant to the question;"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 5,
+        "vars": {
+          "title": "Ocean Pollution and Marine Life",
+          "article": "Ocean pollution poses a severe threat to marine ecosystems. Plastic waste, chemical runoff, and oil spills contaminate ocean waters, harming sea creatures and disrupting food chains. Microplastics are particularly dangerous as they are consumed by small organisms and accumulate up the food chain. Conservation efforts include reducing plastic use, improving waste management, and establishing marine protected areas.",
+          "question": "What are the main types of ocean pollution mentioned?",
+          "answer": "I love going to the beach in summer. The water is usually warm and I enjoy swimming with my friends."
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0.001845,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "is-json"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "const parsed = JSON.parse(output);\nreturn parsed.hasOwnProperty('score') && \n       parsed.hasOwnProperty('feedback') && \n       parsed.hasOwnProperty('improved');\n"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "const parsed = JSON.parse(output);\nreturn parsed.score >= 6;\n"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "const parsed = JSON.parse(output);\nreturn parsed.feedback.includes('personal') || parsed.feedback.includes('experience');\n"
+              }
+            }
+          ],
+          "assertion": null
+        },
+        "id": "609a5513-c643-417f-96fa-d0357c5eab65",
+        "latencyMs": 6,
+        "namedScores": {},
+        "prompt": {
+          "raw": "You are a English teacher.\nYou privode the user a article and some questions to help the user grasp the main infomation of the article. Evaluate the user's answer to one of the questions about the article. If the user's answer is not related to the question or empty, score should be 0. Output a JSON object.  {\"score\": the score of the answer (0-10),  \"feedback\": a brief feedback to user's answer, \"improved\": the improved answer}.\nArticle: \n    The Benefits of Learning a Second Language\n    Learning a second language offers numerous cognitive and social benefits. It improves memory, enhances problem-solving skills, and increases cultural awareness. Bilingual individuals often have better job opportunities and can communicate with a wider range of people. Language learning also delays cognitive decline in older adults and improves multitasking abilities.\nQuestions: \n    Share your experience learning English. What has been the most challenging and rewarding part?\n\nUser's answer: \n    \"Learning English has been a journey for me. The most challenging part is pronunciation because English sounds are very different from my native language. Sometimes I feel embarrassed when people don't understand me. But the rewarding part is being able to watch movies without subtitles and make friends from different countries. It opens many doors for me.\"\n",
+          "label": "You are a English teacher.\nYou privode the user a article and some questions to help the user grasp the main infomation of the article. Evaluate the user's answer to one of the questions about the article. If the user's answer is not related to the question or empty, score should be 0. Output a JSON object.  {\"score\": the score of the answer (0-10),  \"feedback\": a brief feedback to user's answer, \"improved\": the improved answer}.\nArticle: \n    {{title}}\n    {{article}}\nQuestions: \n    {{question}}\n\nUser's answer: \n    \"{{answer}}\"\n"
+        },
+        "promptId": "928527a92712370131fda159d2668e8264d4a54abdbd662baeb9bd50dd45e058",
+        "promptIdx": 0,
+        "provider": {
+          "id": "openai:gpt-4o",
+          "label": ""
+        },
+        "response": {
+          "output": "{\n  \"score\": 10,\n  \"feedback\": \"Great job! Your answer is well-articulated and directly addresses both the challenging and rewarding aspects of learning English. You provided personal experiences which demonstrate a clear understanding of the prompt.\",\n  \"improved\": \"Learning English has been a journey for me. The most challenging part is pronunciation because English sounds are very different from my native language. Sometimes I feel embarrassed when people don't understand me. But the rewarding part is being able to watch movies without subtitles and make friends from different countries. It opens many doors for me.\"\n}",
+          "tokenUsage": {
+            "cached": 384,
+            "total": 384
+          },
+          "cached": true,
+          "finishReason": "stop",
+          "cost": 0.001845
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "vars": {
+            "title": "The Benefits of Learning a Second Language",
+            "article": "Learning a second language offers numerous cognitive and social benefits. It improves memory, enhances problem-solving skills, and increases cultural awareness. Bilingual individuals often have better job opportunities and can communicate with a wider range of people. Language learning also delays cognitive decline in older adults and improves multitasking abilities.",
+            "question": "Share your experience learning English. What has been the most challenging and rewarding part?",
+            "answer": "Learning English has been a journey for me. The most challenging part is pronunciation because English sounds are very different from my native language. Sometimes I feel embarrassed when people don't understand me. But the rewarding part is being able to watch movies without subtitles and make friends from different countries. It opens many doors for me."
+          },
+          "assert": [
+            {
+              "type": "is-json"
+            },
+            {
+              "type": "javascript",
+              "value": "const parsed = JSON.parse(output);\nreturn parsed.hasOwnProperty('score') && \n       parsed.hasOwnProperty('feedback') && \n       parsed.hasOwnProperty('improved');\n"
+            },
+            {
+              "type": "javascript",
+              "value": "const parsed = JSON.parse(output);\nreturn parsed.score >= 6;\n"
+            },
+            {
+              "type": "javascript",
+              "value": "const parsed = JSON.parse(output);\nreturn parsed.feedback.includes('personal') || parsed.feedback.includes('experience');\n"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 7,
+        "vars": {
+          "title": "The Benefits of Learning a Second Language",
+          "article": "Learning a second language offers numerous cognitive and social benefits. It improves memory, enhances problem-solving skills, and increases cultural awareness. Bilingual individuals often have better job opportunities and can communicate with a wider range of people. Language learning also delays cognitive decline in older adults and improves multitasking abilities.",
+          "question": "Share your experience learning English. What has been the most challenging and rewarding part?",
+          "answer": "Learning English has been a journey for me. The most challenging part is pronunciation because English sounds are very different from my native language. Sometimes I feel embarrassed when people don't understand me. But the rewarding part is being able to watch movies without subtitles and make friends from different countries. It opens many doors for me."
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0.0026125000000000002,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "is-json"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "const parsed = JSON.parse(output);\nreturn parsed.hasOwnProperty('score') && \n       parsed.hasOwnProperty('feedback') && \n       parsed.hasOwnProperty('improved');\n"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "const parsed = JSON.parse(output);\nreturn parsed.score >= 6;\n"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "javascript",
+                "value": "const parsed = JSON.parse(output);\nreturn parsed.feedback.includes('personal') || parsed.feedback.includes('experience');\n"
+              }
+            }
+          ],
+          "assertion": null
+        },
+        "id": "8b88455e-b886-49a4-b245-62a3e5c1aa49",
+        "latencyMs": 5,
+        "namedScores": {},
+        "prompt": {
+          "raw": "You are a English teacher.\nYou privode the user an article and some discussion questions related to this article. The questions is related to the article's topic to everyday life or personal experience, so it's easy for ESL students like me to talk about them in class. Evaluate the user's answer to one of the questions about the article. Output a JSON object. {\"score\": the score of the answer (0-10),  \"feedback\": a brief feedback to user's answer}, \"improved\": the improved answer.\nArticle: \n    The Benefits of Learning a Second Language\n    Learning a second language offers numerous cognitive and social benefits. It improves memory, enhances problem-solving skills, and increases cultural awareness. Bilingual individuals often have better job opportunities and can communicate with a wider range of people. Language learning also delays cognitive decline in older adults and improves multitasking abilities.\nQuestions: \n    Share your experience learning English. What has been the most challenging and rewarding part?\n\nUser's answer:\n    \"Learning English has been a journey for me. The most challenging part is pronunciation because English sounds are very different from my native language. Sometimes I feel embarrassed when people don't understand me. But the rewarding part is being able to watch movies without subtitles and make friends from different countries. It opens many doors for me.\"\n",
+          "label": "You are a English teacher.\nYou privode the user an article and some discussion questions related to this article. The questions is related to the article's topic to everyday life or personal experience, so it's easy for ESL students like me to talk about them in class. Evaluate the user's answer to one of the questions about the article. Output a JSON object. {\"score\": the score of the answer (0-10),  \"feedback\": a brief feedback to user's answer}, \"improved\": the improved answer.\nArticle: \n    {{title}}\n    {{article}}\nQuestions: \n    {{question}}\n\nUser's answer:\n    \"{{answer}}\"\n"
+        },
+        "promptId": "a21aefadc5686273b93d96c4a55d63c1942f775e13bd695b30c3658e2a1715cc",
+        "promptIdx": 1,
+        "provider": {
+          "id": "openai:gpt-4o",
+          "label": ""
+        },
+        "response": {
+          "output": "{\"score\": 8, \"feedback\": \"Your answer effectively communicates both the challenges and rewards of learning English. The emotional aspect of feeling embarrassed is relatable, and you clearly highlight the rewarding experiences, such as watching movies and making friends. Consider providing more specific examples or elaborating on particular situations to make your answer more vivid.\", \"improved\": \"Learning English has been a journey for me. The most challenging part has been pronunciation because English sounds are very different from my native language. For instance, it's difficult for me to distinguish between words like 'ship' and 'sheep.' Sometimes I feel embarrassed when people don’t understand me in conversations. However, the most rewarding part is being able to watch movies without subtitles and understanding cultural references. It has also allowed me to make friends from different countries; for example, I met a friend from Brazil through an online language exchange program. These experiences have truly opened many doors for me, both personally and professionally.\"}",
+          "tokenUsage": {
+            "cached": 463,
+            "total": 463
+          },
+          "cached": true,
+          "finishReason": "stop",
+          "cost": 0.0026125000000000002
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "vars": {
+            "title": "The Benefits of Learning a Second Language",
+            "article": "Learning a second language offers numerous cognitive and social benefits. It improves memory, enhances problem-solving skills, and increases cultural awareness. Bilingual individuals often have better job opportunities and can communicate with a wider range of people. Language learning also delays cognitive decline in older adults and improves multitasking abilities.",
+            "question": "Share your experience learning English. What has been the most challenging and rewarding part?",
+            "answer": "Learning English has been a journey for me. The most challenging part is pronunciation because English sounds are very different from my native language. Sometimes I feel embarrassed when people don't understand me. But the rewarding part is being able to watch movies without subtitles and make friends from different countries. It opens many doors for me."
+          },
+          "assert": [
+            {
+              "type": "is-json"
+            },
+            {
+              "type": "javascript",
+              "value": "const parsed = JSON.parse(output);\nreturn parsed.hasOwnProperty('score') && \n       parsed.hasOwnProperty('feedback') && \n       parsed.hasOwnProperty('improved');\n"
+            },
+            {
+              "type": "javascript",
+              "value": "const parsed = JSON.parse(output);\nreturn parsed.score >= 6;\n"
+            },
+            {
+              "type": "javascript",
+              "value": "const parsed = JSON.parse(output);\nreturn parsed.feedback.includes('personal') || parsed.feedback.includes('experience');\n"
+            }
+          ],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 7,
+        "vars": {
+          "title": "The Benefits of Learning a Second Language",
+          "article": "Learning a second language offers numerous cognitive and social benefits. It improves memory, enhances problem-solving skills, and increases cultural awareness. Bilingual individuals often have better job opportunities and can communicate with a wider range of people. Language learning also delays cognitive decline in older adults and improves multitasking abilities.",
+          "question": "Share your experience learning English. What has been the most challenging and rewarding part?",
+          "answer": "Learning English has been a journey for me. The most challenging part is pronunciation because English sounds are very different from my native language. Sometimes I feel embarrassed when people don't understand me. But the rewarding part is being able to watch movies without subtitles and make friends from different countries. It opens many doors for me."
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      }
+    ],
+    "stats": {
+      "successes": 16,
+      "failures": 0,
+      "errors": 0,
+      "tokenUsage": {
+        "cached": 5535,
+        "completion": 0,
+        "prompt": 0,
+        "total": 5535,
+        "numRequests": 16,
+        "completionDetails": {
+          "reasoning": 0,
+          "acceptedPrediction": 0,
+          "rejectedPrediction": 0
+        },
+        "assertions": {
+          "total": 616,
+          "prompt": 0,
+          "completion": 0,
+          "cached": 616
+        }
+      }
+    }
+  },
+  "config": {
+    "tags": {},
+    "description": "Test cases for English teacher evaluation prompts",
+    "prompts": [
+      {
+        "id": "comprehension_prompt",
+        "raw": "You are a English teacher.\nYou privode the user a article and some questions to help the user grasp the main infomation of the article. Evaluate the user's answer to one of the questions about the article. If the user's answer is not related to the question or empty, score should be 0. Output a JSON object.  {\"score\": the score of the answer (0-10),  \"feedback\": a brief feedback to user's answer, \"improved\": the improved answer}.\nArticle: \n    {{title}}\n    {{article}}\nQuestions: \n    {{question}}\n\nUser's answer: \n    \"{{answer}}\"\n"
+      },
+      {
+        "id": "discussion_prompt",
+        "raw": "You are a English teacher.\nYou privode the user an article and some discussion questions related to this article. The questions is related to the article's topic to everyday life or personal experience, so it's easy for ESL students like me to talk about them in class. Evaluate the user's answer to one of the questions about the article. Output a JSON object. {\"score\": the score of the answer (0-10),  \"feedback\": a brief feedback to user's answer}, \"improved\": the improved answer.\nArticle: \n    {{title}}\n    {{article}}\nQuestions: \n    {{question}}\n\nUser's answer:\n    \"{{answer}}\"\n"
+      }
+    ],
+    "providers": [
+      {
+        "id": "openai:gpt-4o",
+        "config": {
+          "response_format": {
+            "type": "json_object"
+          }
+        }
+      }
+    ],
+    "tests": [
+      {
+        "vars": {
+          "title": "Global Climate Change: Causes and Effects",
+          "article": "Climate change refers to long-term shifts in global temperatures and weather patterns. While climate variations occur naturally, human activities have been the dominant driver since the 1800s, primarily due to the burning of fossil fuels like coal, oil, and gas. These activities release greenhouse gases such as carbon dioxide and methane, which trap heat in the atmosphere and cause global warming. The effects include rising sea levels, extreme weather events, and disruptions to ecosystems.",
+          "question": "What are the main causes of climate change according to the article?",
+          "answer": "The main cause is burning fossil fuels"
+        },
+        "assert": [
+          {
+            "type": "is-json"
+          },
+          {
+            "type": "javascript",
+            "value": "const parsed = JSON.parse(output);\nreturn parsed.score >= 0 && parsed.score <= 10;\n"
+          },
+          {
+            "type": "javascript",
+            "value": "const parsed = JSON.parse(output);\nreturn parsed.feedback && parsed.feedback.length > 10;\n"
+          },
+          {
+            "type": "javascript",
+            "value": "const parsed = JSON.parse(output);\nreturn parsed.improved && parsed.improved.length > 10;\n"
+          }
+        ]
+      },
+      {
+        "vars": {
+          "title": "Global Climate Change: Causes and Effects",
+          "article": "Climate change refers to long-term shifts in global temperatures and weather patterns. While climate variations occur naturally, human activities have been the dominant driver since the 1800s, primarily due to the burning of fossil fuels like coal, oil, and gas. These activities release greenhouse gases such as carbon dioxide and methane, which trap heat in the atmosphere and cause global warming. The effects include rising sea levels, extreme weather events, and disruptions to ecosystems.",
+          "question": "How do you personally contribute to reducing climate change in your daily life?",
+          "answer": "I recycle sometimes and try to use less plastic bags when shopping"
+        },
+        "assert": [
+          {
+            "type": "is-json"
+          },
+          {
+            "type": "javascript",
+            "value": "const parsed = JSON.parse(output);\nreturn parsed.score >= 0 && parsed.score <= 10;\n"
+          }
+        ]
+      },
+      {
+        "vars": {
+          "title": "The Impact of Artificial Intelligence on Education",
+          "article": "Artificial Intelligence (AI) is revolutionizing education by providing personalized learning experiences, automating administrative tasks, and offering intelligent tutoring systems. AI can analyze student performance data to identify learning gaps and suggest targeted interventions. Virtual assistants can answer student questions 24/7, while automated grading systems save teachers valuable time. However, concerns about data privacy and the digital divide remain significant challenges.",
+          "question": "What are the benefits of AI in education mentioned in the article?",
+          "answer": "According to the article, AI benefits education in several ways: it provides personalized learning experiences tailored to individual students, automates time-consuming administrative tasks for educators, offers intelligent tutoring systems that can provide additional support, analyzes student performance data to identify learning gaps, provides 24/7 availability through virtual assistants, and saves teachers time through automated grading systems."
+        },
+        "assert": [
+          {
+            "type": "javascript",
+            "value": "const parsed = JSON.parse(output);\nreturn parsed.score >= 8;\n"
+          }
+        ]
+      },
+      {
+        "vars": {
+          "title": "The Impact of Artificial Intelligence on Education",
+          "article": "Artificial Intelligence (AI) is revolutionizing education by providing personalized learning experiences, automating administrative tasks, and offering intelligent tutoring systems. AI can analyze student performance data to identify learning gaps and suggest targeted interventions. Virtual assistants can answer student questions 24/7, while automated grading systems save teachers valuable time. However, concerns about data privacy and the digital divide remain significant challenges.",
+          "question": "What are the benefits of AI in education mentioned in the article?",
+          "answer": "AI is good"
+        },
+        "assert": [
+          {
+            "type": "javascript",
+            "value": "const parsed = JSON.parse(output);\nreturn parsed.score <= 3;\n"
+          },
+          {
+            "type": "javascript",
+            "value": "const parsed = JSON.parse(output);\nreturn parsed.feedback.toLowerCase().includes('specific') || parsed.feedback.toLowerCase().includes('detail');\n"
+          }
+        ]
+      },
+      {
+        "vars": {
+          "title": "The Importance of Sleep for Mental Health",
+          "article": "Sleep plays a crucial role in maintaining good mental health. During sleep, the brain processes emotions and consolidates memories. Lack of sleep can lead to increased stress, anxiety, and depression. Adults should aim for 7-9 hours of quality sleep per night. Good sleep hygiene includes maintaining a regular sleep schedule, avoiding screens before bedtime, and creating a comfortable sleep environment.",
+          "question": "Why is sleep important for mental health?",
+          "answer": "Sleep are very important because brain need rest and when no sleep people feeling bad and stress more. Also memory not work good without sleeps."
+        },
+        "assert": [
+          {
+            "type": "javascript",
+            "value": "const parsed = JSON.parse(output);\nreturn parsed.feedback.toLowerCase().includes('gramma');\n"
+          }
+        ]
+      },
+      {
+        "vars": {
+          "title": "Ocean Pollution and Marine Life",
+          "article": "Ocean pollution poses a severe threat to marine ecosystems. Plastic waste, chemical runoff, and oil spills contaminate ocean waters, harming sea creatures and disrupting food chains. Microplastics are particularly dangerous as they are consumed by small organisms and accumulate up the food chain. Conservation efforts include reducing plastic use, improving waste management, and establishing marine protected areas.",
+          "question": "What are the main types of ocean pollution mentioned?",
+          "answer": "I love going to the beach in summer. The water is usually warm and I enjoy swimming with my friends."
+        },
+        "assert": [
+          {
+            "type": "javascript",
+            "value": "const parsed = JSON.parse(output);\nreturn parsed.score <= 2;\n"
+          },
+          {
+            "type": "llm-rubric",
+            "value": "answer is not relevant to the question;"
+          }
+        ]
+      },
+      {
+        "vars": {
+          "title": "Renewable Energy Sources",
+          "article": "Renewable energy comes from natural sources that replenish themselves, including solar, wind, hydroelectric, and geothermal power. These sources produce little to no greenhouse gas emissions and help combat climate change. Solar panels convert sunlight into electricity, while wind turbines harness wind power. Despite higher initial costs, renewable energy is becoming increasingly cost-competitive with fossil fuels.",
+          "question": "What are the main types of renewable energy mentioned?",
+          "answer": ""
+        },
+        "assert": [
+          {
+            "type": "is-json"
+          },
+          {
+            "type": "javascript",
+            "value": "const parsed = JSON.parse(output);\nreturn parsed.score === 0;\n"
+          }
+        ]
+      },
+      {
+        "vars": {
+          "title": "The Benefits of Learning a Second Language",
+          "article": "Learning a second language offers numerous cognitive and social benefits. It improves memory, enhances problem-solving skills, and increases cultural awareness. Bilingual individuals often have better job opportunities and can communicate with a wider range of people. Language learning also delays cognitive decline in older adults and improves multitasking abilities.",
+          "question": "Share your experience learning English. What has been the most challenging and rewarding part?",
+          "answer": "Learning English has been a journey for me. The most challenging part is pronunciation because English sounds are very different from my native language. Sometimes I feel embarrassed when people don't understand me. But the rewarding part is being able to watch movies without subtitles and make friends from different countries. It opens many doors for me."
+        },
+        "assert": [
+          {
+            "type": "javascript",
+            "value": "const parsed = JSON.parse(output);\nreturn parsed.score >= 6;\n"
+          },
+          {
+            "type": "javascript",
+            "value": "const parsed = JSON.parse(output);\nreturn parsed.feedback.includes('personal') || parsed.feedback.includes('experience');\n"
+          }
+        ]
+      }
+    ],
+    "scenarios": [],
+    "env": {},
+    "sharing": true,
+    "defaultTest": {
+      "assert": [
+        {
+          "type": "is-json"
+        },
+        {
+          "type": "javascript",
+          "value": "const parsed = JSON.parse(output);\nreturn parsed.hasOwnProperty('score') && \n       parsed.hasOwnProperty('feedback') && \n       parsed.hasOwnProperty('improved');\n"
+        }
+      ],
+      "vars": {},
+      "options": {},
+      "metadata": {}
+    },
+    "outputPath": [
+      "results.json"
+    ],
+    "extensions": [],
+    "metadata": {}
+  },
+  "shareableUrl": null
+}

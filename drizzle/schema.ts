@@ -1,4 +1,4 @@
-import { pgTable, serial, uuid, integer, timestamp, varchar, index, foreignKey, unique, text, jsonb, date, primaryKey } from "drizzle-orm/pg-core"
+import { pgTable, unique, serial, uuid, integer, timestamp, smallint, text, jsonb, varchar, index, foreignKey, date, primaryKey } from "drizzle-orm/pg-core"
 import { sql } from "drizzle-orm"
 
 
@@ -7,12 +7,28 @@ export const brieflyHistory = pgTable("briefly_history", {
 	id: serial().primaryKey().notNull(),
 	historyId: uuid("history_id").defaultRandom().notNull(),
 	articleId: uuid("article_id").notNull(),
-	status: integer().notNull(),
 	score: integer().notNull(),
 	userId: uuid("user_id").notNull(),
 	createAt: timestamp("create_at", { withTimezone: true, mode: 'string' }).defaultNow().notNull(),
 	updateAt: timestamp("update_at", { withTimezone: true, mode: 'string' }).defaultNow().notNull(),
-});
+	questionsNum: smallint("questions_num").notNull(),
+	answersNum: smallint("answers_num").notNull(),
+}, (table) => [
+	unique("briefly_history_article_id_user_id").on(table.articleId, table.userId),
+]);
+
+export const brieflySumup = pgTable("briefly_sumup", {
+	id: serial().primaryKey().notNull(),
+	sumupId: uuid("sumup_id").defaultRandom().notNull(),
+	articleId: uuid("article_id").notNull(),
+	message: text().notNull(),
+	type: integer().notNull(),
+	extra: jsonb(),
+	createAt: timestamp("create_at", { withTimezone: true, mode: 'string' }).defaultNow().notNull(),
+	userId: uuid("user_id").notNull(),
+}, (table) => [
+	unique("briefly_sumup_article_id_user_id").on(table.articleId, table.userId),
+]);
 
 export const brieflyUser = pgTable("briefly_user", {
 	id: varchar({ length: 255 }).primaryKey().notNull(),
@@ -82,7 +98,11 @@ export const brieflyAnswer = pgTable("briefly_answer", {
 	userId: uuid("user_id").notNull(),
 	articleId: uuid("article_id").notNull(),
 	createAt: timestamp("create_at", { withTimezone: true, mode: 'string' }).defaultNow().notNull(),
-});
+	updateAt: timestamp("update_at", { withTimezone: true, mode: 'string' }).defaultNow().notNull(),
+}, (table) => [
+	index("briefly_answer_article_id_user_id").using("btree", table.articleId.asc().nullsLast().op("uuid_ops"), table.userId.asc().nullsLast().op("uuid_ops")),
+	unique("briefly_answer_question_id_user_id").on(table.questionId, table.userId),
+]);
 
 export const brieflyVerificationToken = pgTable("briefly_verification_token", {
 	identifier: varchar({ length: 255 }).notNull(),

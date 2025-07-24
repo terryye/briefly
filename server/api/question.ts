@@ -2,12 +2,17 @@ import { createTRPCRouter, publicProcedure } from "@/server/api/trpc";
 //import { format } from "date-fns";
 import { and, asc, count, eq } from "drizzle-orm";
 import z from "zod";
+import { generateQuestions, QuestionsGroup } from "../ai/llm_questions";
 import { db, schema } from "../db";
-import { aiQuestions, QuestionsGroup } from "../openai";
 import { getArticleById } from "./article";
 
 const t_question = schema.question;
 export type Question = typeof t_question.$inferSelect;
+
+export enum QuestionType {
+    Summary = 1,
+    Discussion = 2,
+}
 
 export default createTRPCRouter({
     list: publicProcedure
@@ -25,7 +30,7 @@ export default createTRPCRouter({
                 return result;
             } else {
                 const article = await getArticleById(articleId);
-                const questions = await aiQuestions(
+                const questions = await generateQuestions(
                     article.title,
                     article.content
                 );
@@ -63,7 +68,7 @@ export async function getQuestionsByArticleId(
     articleId: string,
     type?: number
 ) {
-    const result = await db
+    const query = db
         .select()
         .from(t_question)
         .where(
@@ -72,6 +77,12 @@ export async function getQuestionsByArticleId(
                 type ? eq(t_question.type, type) : undefined
             )
         );
+    if (type) {
+        query.orderBy(asc(t_question.seq));
+    } else {
+        query.orderBy(asc(t_question.type), asc(t_question.seq));
+    }
+    const result = await query;
     return result;
 }
 

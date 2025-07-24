@@ -185,3 +185,16 @@ export const history = createTable("history", {
     questionsNum: integer("questions_num").notNull(),
     answersNum: integer("answers_num").notNull(),
 });
+
+export const sumup = createTable("sumup", {
+    id: serial().primaryKey().notNull(),
+    sumupId: uuid("sumup_id").defaultRandom().notNull(),
+    articleId: uuid("article_id").notNull(),
+    userId: uuid("user_id").notNull(),
+    message: text().notNull(),
+    type: integer().notNull(),
+    extra: jsonb(),
+    createAt: timestamp("create_at", { withTimezone: true, mode: "string" })
+        .defaultNow()
+        .notNull(),
+});

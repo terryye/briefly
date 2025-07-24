@@ -3,19 +3,15 @@ import {
     protectedProcedure,
     publicProcedure,
 } from "@/server/api/trpc";
-//import { format } from "date-fns";
 import { and, avg, count, eq } from "drizzle-orm";
 import z from "zod";
+import { evaluateAnswer } from "../ai/llm_evaluate";
 import { db, schema } from "../db";
-import { aiEvaluateAnswer } from "../openai";
 import { getArticleById } from "./article";
 import { updateHistoryByArticleId } from "./history";
 import { getQuestionsByArticleId, getQuestionsById } from "./question";
 
-const t_question = schema.question;
 const t_answer = schema.answer;
-const t_article = schema.article;
-const t_history = schema.history;
 export type Answer = typeof t_answer.$inferSelect;
 export type Feedback = Answer["feedbacks"];
 
@@ -24,23 +20,8 @@ export default createTRPCRouter({
         .input(z.object({ articleId: z.string() }))
         .query(async ({ input, ctx }) => {
             const articleId = input.articleId;
-
-            console.log("articleId", articleId);
-            const result = await db
-                .select()
-                .from(t_answer)
-                .where(
-                    and(
-                        eq(t_answer.articleId, articleId),
-                        eq(
-                            t_answer.userId,
-                            ctx.session?.user.id ??
-                                "00000000-0000-0000-0000-000000000000"
-                        )
-                    )
-                )
-                .limit(100);
-            return result;
+            const userId = ctx.session?.user.id;
+            return await getAnswersByArticleId(articleId, userId);
         }),
     submit: protectedProcedure
         .input(z.object({ questionId: z.string(), answer: z.string() }))
@@ -67,7 +48,7 @@ export default createTRPCRouter({
                 throw new Error("Article not found");
             }
 
-            const aiFeedback = await aiEvaluateAnswer(
+            const aiFeedback = await evaluateAnswer(
                 article.title,
                 article.content,
                 questions,
@@ -121,4 +102,24 @@ export async function getAnswerStatistics(articleId: string, userId: string) {
         );
 
     return result[0] ?? { count: 0, scoreAvg: 0 };
+}
+
+export async function getAnswersByArticleId(
+    articleId: string,
+    userId: string | undefined
+) {
+    const result = await db
+        .select()
+        .from(t_answer)
+        .where(
+            and(
+                eq(t_answer.articleId, articleId),
+                eq(
+                    t_answer.userId,
+                    userId ?? "00000000-0000-0000-0000-000000000000"
+                )
+            )
+        )
+        .limit(100);
+    return result;
 }

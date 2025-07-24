@@ -1,0 +1,211 @@
+# Promptfoo configuration for ESL Question Generation
+description: Test cases for ESL instructor question generation
+
+providers:
+    - id: openai:gpt-4o
+      config:
+          response_format:
+              type: json_object
+
+prompts:
+    - |
+        You are an Expert ESL instructor specializing in comprehension strategies. User will provide a news or article.  Please generate exactly: 
+        1. Three comprehension questions testing factual understanding
+           Example: "What are the three main reasons mentioned for..."
+            1) [Question focusing on main idea]
+            2) [Question about supporting details]
+            3) [Question about cause/effect or sequence]
+        2. Three discussion questions connecting to personal experience
+           Example: "How does this situation compare to your experience with..."
+            1). [Personal connection question]
+            2). [Opinion/preference question]
+            3). [Real-world application question]
+
+        {{title}}
+
+        {{content}}
+
+        Output a JSON object.
+        {
+            "summaryQuestions": [ // 3 questions for comprehension
+                "Question 1",
+                "Question 2",
+                "Question 3"
+            ],
+            "discussionQuestions": [// 3 questions for discussion
+                "Question 1",
+                "Question 2",
+                "Question 3"
+            ]
+        }
+
+tests:
+    - description: Test with technology news article
+      vars:
+          article: |
+              Apple announced its new Vision Pro headset yesterday at a price of $3,499. The device features advanced eye-tracking technology, hand gesture recognition, and a custom R1 chip for processing. Early reviews praise the display quality but criticize the weight and battery life of only 2 hours. Apple expects to sell 400,000 units in the first year, targeting professionals and early adopters. The company plans to release a cheaper version in 2025.
+      assert:
+          - type: is-json
+          - type: javascript
+            value: |
+                const result = JSON.parse(output);
+                // Check structure
+                if (!result.summaryQuestions || !result.discussionQuestions) return false;
+                if (result.summaryQuestions.length !== 3) return false;
+                if (result.discussionQuestions.length !== 3) return false;
+
+                // Check comprehension questions quality
+                const summaryQuestions = result.summaryQuestions.join(' ').toLowerCase();
+                const hasFactualElements = 
+                  summaryQuestions.includes('price') || 
+                  summaryQuestions.includes('features') || 
+                  summaryQuestions.includes('battery') ||
+                  summaryQuestions.includes('reviews') ||
+                  summaryQuestions.includes('units');
+
+                // Check discussion questions quality
+                const discussionQuestions = result.discussionQuestions.join(' ').toLowerCase();
+                const hasPersonalElements = 
+                  discussionQuestions.includes('you') || 
+                  discussionQuestions.includes('your') || 
+                  discussionQuestions.includes('experience') ||
+                  discussionQuestions.includes('think') ||
+                  discussionQuestions.includes('opinion');
+
+                return hasFactualElements && hasPersonalElements;
+
+    - description: Test with environmental news article
+      vars:
+          article: |
+              A new study reveals that ocean temperatures have risen by 0.5 degrees Celsius over the past decade, affecting marine ecosystems worldwide. Coral reefs in Australia have experienced three major bleaching events since 2016. Scientists report that 14% of coral reefs have been lost globally. The study suggests immediate action is needed, including reducing carbon emissions by 45% by 2030. Local communities are implementing reef restoration projects using heat-resistant coral species.
+      assert:
+          - type: is-json
+          - type: javascript
+            value: |
+                const result = JSON.parse(output);
+                // Basic structure check
+                if (!result.summaryQuestions || !result.discussionQuestions) return false;
+                if (result.summaryQuestions.length !== 3 || result.discussionQuestions.length !== 3) return false;
+
+                // Check for environmental topic coverage
+                const allQuestions = [...result.summaryQuestions, ...result.discussionQuestions].join(' ').toLowerCase();
+                const hasRelevantContent = 
+                  allQuestions.includes('temperature') || 
+                  allQuestions.includes('coral') || 
+                  allQuestions.includes('ocean') ||
+                  allQuestions.includes('climate') ||
+                  allQuestions.includes('environment');
+
+                return hasRelevantContent;
+
+    - description: Test with social issue article
+      vars:
+          article: |
+              A recent survey shows that 67% of remote workers report better work-life balance compared to office workers. However, 45% feel more isolated and miss casual office interactions. Companies are experimenting with hybrid models, requiring 2-3 days in office per week. The study found productivity increased by 13% for remote workers, but creativity and innovation metrics dropped by 8%. Mental health support requests have increased by 25% since widespread remote work adoption in 2020.
+      assert:
+          - type: is-json
+          - type: javascript
+            value: |
+                const result = JSON.parse(output);
+                if (!result.summaryQuestions || !result.discussionQuestions) return false;
+                if (result.summaryQuestions.length !== 3 || result.discussionQuestions.length !== 3) return false;
+
+                // Check comprehension questions target facts
+                const summaryQuestions = result.summaryQuestions.join(' ').toLowerCase();
+                const hasStatistics = 
+                  summaryQuestions.includes('percent') || 
+                  summaryQuestions.includes('%') || 
+                  summaryQuestions.includes('survey') ||
+                  summaryQuestions.includes('study');
+
+                // Check discussion questions are personal
+                const discussionQuestions = result.discussionQuestions.join(' ').toLowerCase();
+                const isPersonal = 
+                  discussionQuestions.includes('your') || 
+                  discussionQuestions.includes('you');
+
+                return hasStatistics && isPersonal;
+
+    - description: Test with health/medical article
+      vars:
+          article: |
+              Researchers have developed a new vaccine that shows 89% effectiveness against a common respiratory virus. The vaccine uses mRNA technology and requires two doses, 21 days apart. Clinical trials involved 30,000 participants across 15 countries. Side effects were mild, including fatigue (65%), headache (42%), and muscle pain (38%). The vaccine can be stored at standard refrigerator temperatures, making distribution easier. Health officials plan to recommend it for adults over 60 and those with chronic conditions.
+      assert:
+          - type: is-json
+          - type: contains-all
+            value:
+                - summaryQuestions
+                - discussionQuestions
+          - type: javascript
+            value: |
+                const result = JSON.parse(output);
+                // Verify all questions are present and non-empty
+                const allQuestionsPresent = 
+                  result.summaryQuestions.every(q => q && q.length > 10) &&
+                  result.discussionQuestions.every(q => q && q.length > 10);
+
+                return allQuestionsPresent;
+
+    - description: Test with education article
+      vars:
+          article: |
+              Finland's education system ranks first globally for the fifth consecutive year. Key factors include no standardized testing until age 16, shorter school days (average 5 hours), and minimal homework. Teachers require master's degrees and are selected from the top 10% of graduates. The curriculum emphasizes creativity, critical thinking, and collaboration over memorization. Student-teacher ratios average 12:1. Despite less time in classroom, Finnish students outperform peers in mathematics, science, and reading comprehension.
+      assert:
+          - type: is-json
+          - type: javascript
+            value: |
+                const result = JSON.parse(output);
+
+                // Check question differentiation
+                const summaryQs = result.summaryQuestions.join(' ');
+                const discussionQs = result.discussionQuestions.join(' ');
+
+                // Summary questions should focus on facts
+                const summaryHasFacts = 
+                  summaryQs.includes('Finland') || 
+                  summaryQs.includes('rank') || 
+                  summaryQs.includes('factors') ||
+                  summaryQs.includes('teachers') ||
+                  summaryQs.includes('students');
+
+                // Discussion questions should be different from summary
+                const questionsAreDifferent = 
+                  result.summaryQuestions[0] !== result.discussionQuestions[0];
+
+                return summaryHasFacts && questionsAreDifferent;
+
+    # Edge case tests
+    - description: Test with very short article
+      vars:
+          article: "Breaking: Earthquake magnitude 6.2 hits Japan. No tsunami warning issued. Minor damage reported."
+      assert:
+          - type: is-json
+          - type: javascript
+            value: |
+                const result = JSON.parse(output);
+                // Should still generate 6 questions even with limited content
+                return result.summaryQuestions.length === 3 && result.discussionQuestions.length === 3;
+
+    - description: Test with technical/scientific article
+      vars:
+          article: |
+              Scientists at CERN have discovered a new subatomic particle with a mass of 4.7 GeV/c². The particle, temporarily named X(4700), exhibits unusual quantum properties including simultaneous charm and anti-charm quark states. Detection required 10 million collision events analyzed by AI algorithms. The discovery challenges the Standard Model of particle physics. Theoretical physicists suggest this could lead to understanding dark matter, which comprises 85% of universe matter. Further experiments planned for 2025 using upgraded Large Hadron Collider.
+      assert:
+          - type: is-json
+          - type: javascript
+            value: |
+                const result = JSON.parse(output);
+
+                // Check that complex content still generates accessible questions
+                const allQuestions = [...result.summaryQuestions, ...result.discussionQuestions];
+
+                // At least some questions should be understandable for ESL students
+                const hasAccessibleLanguage = allQuestions.some(q => 
+                  !q.includes('GeV/c²') && 
+                  !q.includes('quantum') && 
+                  q.split(' ').length < 25  // Not overly complex
+                );
+
+                return hasAccessibleLanguage;
+
+outputPath: result_question.json
