@@ -82,6 +82,7 @@ export const QuestionItem = ({
                             className="cursor-pointer"
                             onClick={() => {
                                 setStatus("editing");
+                                setFocused(question.questionId);
                             }}
                         >
                             {Icons.edit}
