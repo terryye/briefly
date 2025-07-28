@@ -14,7 +14,7 @@ const Rating = ({ score }: { score: number }) => {
                 return (
                     <div
                         key={idx}
-                        className={`mask mask-star  mask-half-${
+                        className={`mask mask-star-2 mask-half-${
                             idx % 2 == 0 ? "1" : "2"
                         }  ${color}`}
                         aria-label={`${(idx + 1) / 2} star`}
