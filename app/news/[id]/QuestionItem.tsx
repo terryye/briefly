@@ -1,6 +1,7 @@
 "use client";
 import Icons from "@/app/components/ui/Icons";
 import Loading from "@/app/components/ui/Loading";
+import Rating from "@/app/components/ui/Rating";
 import { useLogin } from "@/app/providers/LoginProvider";
 import type { Answer } from "@/server/api/answer";
 import type { Question } from "@/server/api/question";
@@ -102,7 +103,18 @@ export const QuestionItem = ({
                 answer?.feedbacks?.map((feedback, index) => (
                     <div className="chat chat-end" key={index}>
                         <div className="chat-bubble">
-                            <span className="underline">{feedback.title}</span>
+                            <div className="flex flex-row gap-2">
+                                <div>
+                                    <span className="underline">
+                                        {feedback.title}
+                                    </span>
+                                </div>
+                                <div>
+                                    {index == 0 && (
+                                        <Rating score={answer.score} />
+                                    )}
+                                </div>
+                            </div>
                             <p>{feedback.content}</p>
                         </div>
                     </div>
@@ -124,6 +136,7 @@ export const QuestionItem = ({
                             setAnswerContent(e.target.value);
                         }}
                         value={answerContent ?? ""}
+                        maxLength={600}
                     />
                     {answer?.answer && isFocused && (
                         <div className="flex flex-row gap-2 justify-center">
