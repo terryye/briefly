@@ -2,7 +2,7 @@
 import { useState } from "react";
 
 export default function Home() {
-    const [showLogin, setShowLogin] = useState(false);
+    const [, setShowLogin] = useState(false);
 
     return (
         <>

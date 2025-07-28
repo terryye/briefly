@@ -9,7 +9,6 @@ import answerRouter from "./answer";
 import articleRouter from "./article";
 import historyRouter from "./history";
 import questionRouter from "./question";
-import summaryRouter from "./summary";
 import summupRouter from "./summup";
 
 export const appRouter = createTRPCRouter({
@@ -29,7 +28,6 @@ export const appRouter = createTRPCRouter({
         }),
     }),
     article: articleRouter,
-    summary: summaryRouter,
     question: questionRouter,
     answer: answerRouter,
     history: historyRouter,

@@ -14,6 +14,7 @@ const Login = ({ onClose }: LoginProps) => {
             onClose={onClose}
             buttons={[
                 <button
+                    key="login"
                     className="btn btn-sm btn-primary"
                     onClick={() => {
                         signIn();
@@ -21,7 +22,9 @@ const Login = ({ onClose }: LoginProps) => {
                 >
                     Login
                 </button>,
-                <button className="btn btn-sm">Close</button>,
+                <button key="close" className="btn btn-sm">
+                    Close
+                </button>,
             ]}
         >
             <p className="py-4">Please login to continue...</p>

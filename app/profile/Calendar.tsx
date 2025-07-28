@@ -22,18 +22,16 @@ const Calendar = () => {
         endDate: monthEnd,
     });
 
-    const dates = data
-        ? data?.map((d) => d.createAt).filter((d) => d !== null)
-        : ([] as Date[]);
-
     const CustomNextMonthBtn = (props: NextMonthButtonProps) => {
         return <NextMonthButton {...props} disabled={new Date() < monthEnd} />;
     };
 
     useEffect(() => {
-        setBooked(dates);
-    }, [data?.[0]?.createAt]);
-
+        if (data) {
+            const dates = data.map((d) => d.createAt).filter((d) => d !== null);
+            setBooked(dates);
+        }
+    }, [data]);
     return (
         <>
             <DayPicker

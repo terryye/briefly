@@ -52,7 +52,7 @@ const Questions = ({ articleId }: { articleId: string }) => {
                     Questions About This Article
                 </legend>
 
-                {summaryQuestions.map((q, idx) => (
+                {summaryQuestions.map((q) => (
                     <QuestionItem
                         key={q.questionId}
                         question={q}
@@ -72,7 +72,7 @@ const Questions = ({ articleId }: { articleId: string }) => {
                     <legend className="fieldset-legend">
                         Further Discussions
                     </legend>
-                    {discussionQuestions.map((q, idx) => (
+                    {discussionQuestions.map((q) => (
                         <QuestionItem
                             key={q.questionId}
                             question={q}
