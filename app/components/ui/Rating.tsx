@@ -11,12 +11,11 @@ const Rating = ({ score }: { score: number }) => {
             title={`Score: ${score} / 10`}
         >
             {Array.from({ length: 10 }).map((_, idx) => {
+                const half = idx % 2 == 0 ? "mask-half-1" : "mask-half-2";
                 return (
                     <div
                         key={idx}
-                        className={`mask mask-star-2 mask-half-${
-                            idx % 2 == 0 ? "1" : "2"
-                        }  ${color}`}
+                        className={`mask mask-star-2 ${color} ${half}`}
                         aria-label={`${(idx + 1) / 2} star`}
                         aria-current={idx == score - 1}
                     ></div>
