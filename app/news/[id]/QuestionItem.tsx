@@ -69,8 +69,13 @@ export const QuestionItem = ({
     };
     return (
         <div>
-            <label className="label  whitespace-normal">
+            <label className="label  whitespace-normal flex flex-row gap-2 text-neutral">
                 {question.seq + 1}. {question.question}
+                {isFocused && (
+                    <div className="tooltip" data-tip={"Tip: " + question.tip}>
+                        {Icons.info}
+                    </div>
+                )}
             </label>
 
             {["viewing", "submitting"].includes(status) && ( //answer
@@ -123,7 +128,7 @@ export const QuestionItem = ({
             {["editing"].includes(status) && (
                 <>
                     <textarea
-                        className="textarea w-full my-2"
+                        className="textarea w-full my-2 "
                         placeholder=""
                         onFocus={() => {
                             setFocused(question.questionId);

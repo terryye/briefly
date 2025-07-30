@@ -151,6 +151,7 @@ export const question = createTable("question", {
     seq: integer().notNull(),
     question: text().notNull(),
     type: integer().notNull(),
+    tip: text().notNull(),
 });
 
 export const summary = createTable("summary", {

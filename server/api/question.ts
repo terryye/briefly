@@ -2,7 +2,11 @@ import { createTRPCRouter, publicProcedure } from "@/server/api/trpc";
 //import { format } from "date-fns";
 import { and, asc, count, eq } from "drizzle-orm";
 import z from "zod";
-import { generateQuestions, QuestionsGroup } from "../ai/llm_questions";
+import {
+    generateQuestions,
+    QuestionsGroup,
+    QuestionTip,
+} from "../ai/llm_questions";
 import { db, schema } from "../db";
 import { getArticleById } from "./article";
 
@@ -36,6 +40,7 @@ export default createTRPCRouter({
                 );
 
                 const q = flattenQuestions(questions, articleId);
+
                 result = await db.insert(t_question).values(q).returning();
                 return result;
             }
@@ -52,9 +57,10 @@ export const getById = async (questionId: string) => {
 };
 
 function flattenQuestions(questionGroup: QuestionsGroup, articleId: string) {
-    const _flatten = (questions: string[], type: number) =>
+    const _flatten = (questions: QuestionTip[], type: number) =>
         questions.map((question, seq) => ({
-            question,
+            question: question.question,
+            tip: question.tip,
             articleId,
             seq,
             type,
