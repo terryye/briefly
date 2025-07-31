@@ -21,6 +21,10 @@ const Questions = ({ articleId }: { articleId: string }) => {
         null
     );
 
+    if (questionsLoading || answersLoading || !questions || !answers) {
+        return <Loading />;
+    }
+
     const handleAnswerUpdate = (questionId: string, newAnswer: Answer) => {
         utils.answer.list.setData(
             { articleId: articleId },
@@ -36,15 +40,15 @@ const Questions = ({ articleId }: { articleId: string }) => {
             }
         );
     };
-
-    if (questionsLoading || answersLoading || !questions || !answers) {
-        return <Loading />;
-    }
-
     const summaryQuestions = questions.filter((q) => q.type === 1);
     const discussionQuestions = questions.filter((q) => q.type === 2);
-
     const answersMap = new Map(answers?.map((a) => [a.questionId, a]));
+    const firstQIdWithoutAnswers =
+        questions?.find((q) => !answersMap.has(q.questionId))?.questionId ??
+        null;
+    if (!focusedQuestionId && firstQIdWithoutAnswers) {
+        setFocusedQuestionId(firstQIdWithoutAnswers);
+    }
     return (
         <>
             <fieldset className="fieldset bg-base-200 border-base-300 rounded-box border p-4">

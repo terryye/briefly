@@ -136,6 +136,7 @@ export const QuestionItem = ({
                         onFocus={() => {
                             setFocused(question.questionId);
                         }}
+                        autoFocus={isFocused}
                         onChange={(e) => {
                             if (sessionStatus !== "authenticated") {
                                 showLogin();

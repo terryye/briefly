@@ -27,7 +27,7 @@ export default createTRPCRouter({
                 .select()
                 .from(t_question)
                 .where(eq(t_question.articleId, articleId))
-                .orderBy(asc(t_question.seq))
+                .orderBy(asc(t_question.type), asc(t_question.seq))
                 .limit(100);
 
             if (result.length > 0) {
