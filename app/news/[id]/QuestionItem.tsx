@@ -69,8 +69,7 @@ export const QuestionItem = ({
     };
     return (
         <div>
-            <label className="label  whitespace-normal flex flex-row gap-2 text-neutral">
-                {question.seq + 1}.
+            <div className="label whitespace-normal flex flex-row gap-2 text-neutral align-top">
                 {isFocused && (
                     <div className="tooltip tooltip-right md:tooltip-top ">
                         <div className="tooltip-content text-left">
@@ -79,8 +78,8 @@ export const QuestionItem = ({
                         {Icons.info}
                     </div>
                 )}
-                {question.question}
-            </label>
+                {question.seq + 1}.{question.question}
+            </div>
 
             {["viewing", "submitting"].includes(status) && ( //answer
                 <div className="chat chat-start">

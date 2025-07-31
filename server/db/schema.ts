@@ -118,6 +118,7 @@ export const article = createTable("article", {
     }).defaultNow(),
     date: date({ mode: "date" }).notNull(),
     poster: varchar({ length: 255 }).notNull(),
+    audio: varchar({ length: 255 }).notNull(),
 });
 
 export interface Feedback {
