@@ -152,15 +152,14 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ audioUrl }) => {
         : 0;
 
     return (
-        <div className="bg-white rounded-xl shadow-sm p-2 max-w-4xl w-full">
+        <div className="rounded-xl shadow-sm p-2 max-w-4xl border border-neutral-content/50 w-full">
             <audio ref={audioRef} src={audioUrl} />
 
             <div className="flex items-center gap-4">
                 {/* Play/Pause Button */}
                 <button
-                    className="w-12 h-12 flex items-center justify-center text-blue-500 hover:text-blue-600 transition-colors"
+                    className="w-12 h-12 flex items-center justify-center text-info  hover:cursor-pointer hover:text-info-content  transition-colors"
                     onClick={handlePlayPause}
-                    type="button"
                     aria-label={isPlaying ? "Pause" : "Play"}
                 >
                     {isPlaying ? (
@@ -191,16 +190,16 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ audioUrl }) => {
                     <div className="flex-1 flex items-center gap-3">
                         <div
                             ref={progressRef}
-                            className="relative flex-1 h-1 bg-gray-200 rounded-full cursor-pointer group"
+                            className="relative flex-1 h-1 bg-primary-content rounded-full cursor-pointer group"
                             onMouseDown={handleMouseDown}
                             onClick={handleProgressClick}
                         >
                             <div
-                                className="absolute top-0 left-0 h-full bg-blue-500 rounded-full pointer-events-none"
+                                className="absolute top-0 left-0 h-full bg-info rounded-full pointer-events-none"
                                 style={{ width: `${progressPercentage}%` }}
                             />
                             <div
-                                className="absolute top-5/2 -translate-y-1/2 w-4 h-4 bg-blue-500 rounded-full shadow-md pointer-events-none"
+                                className="absolute top-5/2 -translate-y-1/2 w-4 h-4 bg-info rounded-full shadow-md pointer-events-none"
                                 style={{
                                     left: `${progressPercentage}%`,
                                     transform: "translate(-50%, -50%)",
@@ -210,13 +209,13 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ audioUrl }) => {
                     </div>
 
                     {/* Time Display */}
-                    <div className="text-gray-700 text-sm font-medium tabular-nums">
+                    <div className="base-content text-sm font-medium tabular-nums">
                         {formatTime(currentTime)} / {formatTime(duration)}
                     </div>
 
                     {/* Rewind Button */}
                     <button
-                        className="w-8 h-8 flex items-center justify-center text-gray-500 hover:text-gray-700 transition-colors"
+                        className="w-8 h-8 flex items-center justify-center text-info hover:text-info-content transition-colors"
                         onClick={handleRewind}
                         type="button"
                         aria-label="Restart"
@@ -234,18 +233,18 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ audioUrl }) => {
                     {/* Speed Control */}
                     <div className="relative">
                         <button
-                            className="px-3 py-1 text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors"
+                            className="px-3 py-1 text-sm font-medium  text-info hover:text-info-content transition-colors"
                             onClick={() => setShowSpeedMenu(!showSpeedMenu)}
                             type="button"
                         >
                             {playbackSpeed}x
                         </button>
                         {showSpeedMenu && (
-                            <div className="absolute bottom-full mb-2 right-0 bg-white rounded-lg shadow-lg border border-gray-200 py-1 min-w-[80px]">
-                                {[0.5, 0.75, 1, 1.25, 1.5, 2].map((speed) => (
+                            <div className="absolute bottom-full mb-2 right-0 rounded-lg shadow-lg border border-info py-1 min-w-[80px] bg-base-100 ">
+                                {[0.5, 0.75, 1, 1.25, 1.5].map((speed) => (
                                     <button
                                         key={speed}
-                                        className="block w-full px-4 py-2 text-sm text-left hover:bg-gray-100 transition-colors"
+                                        className="block w-full px-4 py-2 text-sm text-left text-info hover:text-info-content transition-colors"
                                         onClick={() => handleSpeedChange(speed)}
                                     >
                                         {speed}x
