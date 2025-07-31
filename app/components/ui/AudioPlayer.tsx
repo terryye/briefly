@@ -257,6 +257,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ audioUrl }) => {
                     </div>
 
                     {/* Options Menu */}
+                    {/*
                     <button
                         className="hidden w-8 h-8 flex items-center justify-center text-gray-500 hover:text-gray-700 transition-colors"
                         type="button"
@@ -273,6 +274,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ audioUrl }) => {
                             <circle cx="19" cy="12" r="2" />
                         </svg>
                     </button>
+                    */}
                 </div>
             </div>
         </div>

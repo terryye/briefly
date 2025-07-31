@@ -70,7 +70,7 @@ export const QuestionItem = ({
     return (
         <div>
             <div className="label whitespace-normal flex flex-row gap-2 align-top">
-                {isFocused && (
+                {isFocused && question.tip && (
                     <div className="tooltip tooltip-right md:tooltip-top ">
                         <div className="tooltip-content text-left">
                             {question.tip}
