@@ -1,6 +1,7 @@
 import AudioPlayer from "@/app/components/ui/AudioPlayer";
 import Badge from "@/app/components/ui/Badge";
 import { HydrateClient, api } from "@/trpc/server";
+import Image from "next/image";
 import reactStringReplace from "react-string-replace";
 import Questions from "./Questions";
 
@@ -26,13 +27,18 @@ export default async function NewsPage({ params }: { params: Params }) {
             <div className="grid grid-cols-1  sm:grid-cols-2">
                 <div className="prose prose-invert max-w-none p-6">
                     <article className="h-full">
-                        <h1 className="text-2xl font-bold">{article.title}</h1>
-                        <img
-                            width="100%"
-                            alt="Trump and Waltz"
-                            className="py-4 object-fill"
-                            src={article.poster}
-                        />
+                        <h1 className="text-2xl font-bold text-center">
+                            {article.title}
+                        </h1>
+                        <div className="relative w-full aspect-video my-4">
+                            <Image
+                                className="rounded-md"
+                                src={article.poster}
+                                alt={article.title}
+                                fill
+                                style={{ objectFit: "cover" }}
+                            />
+                        </div>
                         {article.audio && (
                             <AudioPlayer audioUrl={article.audio} />
                         )}

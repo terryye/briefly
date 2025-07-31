@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 
 interface AudioPlayerProps {
     audioUrl?: string;
@@ -110,23 +110,26 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ audioUrl }) => {
         handleProgressClick(e);
     };
 
-    const handleMouseMove = (e: MouseEvent): void => {
-        if (!isDragging || !progressRef.current) return;
+    const handleMouseMove = useCallback(
+        (e: MouseEvent): void => {
+            if (!isDragging || !progressRef.current) return;
 
-        const bounds = progressRef.current.getBoundingClientRect();
-        const x = e.clientX - bounds.left;
-        const width = bounds.width;
-        const progress = Math.max(0, Math.min(1, x / width));
-        const newTime = progress * duration;
-        setCurrentTime(newTime);
-    };
+            const bounds = progressRef.current.getBoundingClientRect();
+            const x = e.clientX - bounds.left;
+            const width = bounds.width;
+            const progress = Math.max(0, Math.min(1, x / width));
+            const newTime = progress * duration;
+            setCurrentTime(newTime);
+        },
+        [isDragging, duration]
+    );
 
-    const handleMouseUp = (): void => {
+    const handleMouseUp = useCallback((): void => {
         if (isDragging && audioRef.current) {
             audioRef.current.currentTime = currentTime;
         }
         setIsDragging(false);
-    };
+    }, [isDragging, currentTime]);
 
     const handleSpeedChange = (speed: number): void => {
         if (audioRef.current) {
@@ -135,7 +138,6 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ audioUrl }) => {
             setShowSpeedMenu(false);
         }
     };
-
     useEffect(() => {
         if (isDragging) {
             document.addEventListener("mousemove", handleMouseMove);
@@ -145,7 +147,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ audioUrl }) => {
                 document.removeEventListener("mouseup", handleMouseUp);
             };
         }
-    }, [isDragging, currentTime, duration]);
+    }, [isDragging, handleMouseMove, handleMouseUp]);
 
     const progressPercentage: number = duration
         ? (currentTime / duration) * 100
