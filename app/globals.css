@@ -1,10 +1,11 @@
 @import "tailwindcss";
-@plugin "daisyui" {
-    themes: light --default;
-}
+@plugin "daisyui";
 /*profile calendar checkmark*/
 /*.rdp-selected .rdp-day_button,*/
-
+html,
+body {
+    min-width: 320px;
+}
 .rdp-booked_day {
     background-repeat: no-repeat;
     background-position: right 3px top 3px;
