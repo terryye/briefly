@@ -33,7 +33,7 @@ export default async function NewsPage({ params }: { params: Params }) {
             </div>
             <div className="grid grid-cols-1  sm:grid-cols-2">
                 <div className="prose prose-invert max-w-none p-6">
-                    <article>
+                    <article className="h-full">
                         <h1 className="text-2xl font-bold">{article.title}</h1>
                         <Image
                             width={500}

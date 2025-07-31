@@ -70,12 +70,16 @@ export const QuestionItem = ({
     return (
         <div>
             <label className="label  whitespace-normal flex flex-row gap-2 text-neutral">
-                {question.seq + 1}. {question.question}
+                {question.seq + 1}.
                 {isFocused && (
-                    <div className="tooltip" data-tip={"Tip: " + question.tip}>
+                    <div className="tooltip tooltip-right md:tooltip-top ">
+                        <div className="tooltip-content text-left">
+                            {question.tip}
+                        </div>
                         {Icons.info}
                     </div>
                 )}
+                {question.question}
             </label>
 
             {["viewing", "submitting"].includes(status) && ( //answer
