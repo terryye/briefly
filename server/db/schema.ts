@@ -153,6 +153,7 @@ export const question = createTable("question", {
     question: text().notNull(),
     type: integer().notNull(),
     tip: text().notNull(),
+    answer: text(),
 });
 
 export const summary = createTable("summary", {

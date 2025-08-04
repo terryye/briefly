@@ -59,8 +59,7 @@ export const getById = async (questionId: string) => {
 function flattenQuestions(questionGroup: QuestionsGroup, articleId: string) {
     const _flatten = (questions: QuestionTip[], type: number) =>
         questions.map((question, seq) => ({
-            question: question.question,
-            tip: question.tip,
+            ...question,
             articleId,
             seq,
             type,

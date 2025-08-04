@@ -54,6 +54,8 @@ export default createTRPCRouter({
                 questions,
                 question,
                 type,
+                questionInfo.tip,
+                questionInfo.answer ?? "",
                 answer
             );
             //compose feedbacks
