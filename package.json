@@ -31,6 +31,7 @@
         "react": "^19.0.0",
         "react-day-picker": "^9.6.7",
         "react-dom": "^19.0.0",
+        "react-markdown": "^10.1.0",
         "react-player": "^3.3.1",
         "react-string-replace": "^1.1.1",
         "server-only": "^0.0.1",

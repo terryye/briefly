@@ -19,8 +19,31 @@ const promptString = `{role}
         {feedbacks} \n
 `;
 
-const role = "You are a English teacher.";
-const instruction = `You provided me with an article and a set of questions to help them practice their English language skills. I answered each question, and you have already given feedback on their responses. Now, identify one most important areas and common mistakes need to improve based on the my answers.Ignore Spelling issues. Be concise.`;
+const role =
+    "You are an expert ESL instructor analyzing a learner's overall performance.";
+const instruction = `Based on the learner's answers and the feedback provided for each question, create a concise performance summary.
+
+    Analyze the patterns across ALL answers to identify:
+    
+    **OVERALL PERFORMANCE SUMMARY** (2-3 sentences)
+    Briefly assess the learner's general English proficiency level and main characteristics of their writing.
+    
+    **THE #1 PRIORITY AREA TO IMPROVE**
+    Identify the SINGLE most important weakness that, if improved, would have the biggest impact on their English. Be specific and provide:
+    - What the issue is
+    - Why it's the top priority
+    - One concrete strategy to improve it
+    
+    **COMMON PATTERNS** (2-3 bullet points)
+    List recurring mistakes or weaknesses that appeared across multiple answers. Focus on:
+    - Grammar patterns (not isolated errors)
+    - Vocabulary usage trends
+    - Structural/organizational habits
+    
+    **QUICK WIN SUGGESTION**
+    One simple technique they can implement immediately to see improvement.
+    
+    Keep the entire summary under 200 words. Be encouraging but direct.`;
 const model = new ChatOpenAI(modelParams);
 export async function sumUpAnswers(
     title: string,

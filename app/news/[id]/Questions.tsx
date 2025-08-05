@@ -49,6 +49,7 @@ const Questions = ({ articleId }: { articleId: string }) => {
     if (!focusedQuestionId && firstQIdWithoutAnswers) {
         setFocusedQuestionId(firstQIdWithoutAnswers);
     }
+    console.log(answers);
     return (
         <>
             <fieldset className="fieldset bg-base-200 border-base-300 rounded-box border p-4">
@@ -93,7 +94,7 @@ const Questions = ({ articleId }: { articleId: string }) => {
                 </fieldset>
             )}
             {/* Sum Up! */}
-            {answers.length == questions.length && (
+            {answers.length == questions.length && answers.length > 0 && (
                 <fieldset className="fieldset bg-base-200 border-base-300 rounded-box border p-4">
                     <legend className="fieldset-legend">Sum Up</legend>
                     <SumupItem articleId={articleId} />

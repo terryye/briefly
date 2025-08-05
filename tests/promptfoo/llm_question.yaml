@@ -2,7 +2,7 @@
 description: Test cases for ESL instructor question generation
 
 providers:
-    - id: openai:gpt-4o
+    - id: openai:gpt-4.1-mini
       config:
           response_format:
               type: json_object
@@ -27,7 +27,7 @@ prompts:
 
         Output a JSON object.
         {
-            "summaryQuestions": [ // 3 questions for comprehension
+            "comprehensionQuestions": [ // 3 questions for comprehension
                 "Question 1",
                 "Question 2",
                 "Question 3"
@@ -50,18 +50,18 @@ tests:
             value: |
                 const result = JSON.parse(output);
                 // Check structure
-                if (!result.summaryQuestions || !result.discussionQuestions) return false;
-                if (result.summaryQuestions.length !== 3) return false;
+                if (!result.comprehensionQuestions || !result.discussionQuestions) return false;
+                if (result.comprehensionQuestions.length !== 3) return false;
                 if (result.discussionQuestions.length !== 3) return false;
 
                 // Check comprehension questions quality
-                const summaryQuestions = result.summaryQuestions.join(' ').toLowerCase();
+                const comprehensionQuestions = result.comprehensionQuestions.join(' ').toLowerCase();
                 const hasFactualElements = 
-                  summaryQuestions.includes('price') || 
-                  summaryQuestions.includes('features') || 
-                  summaryQuestions.includes('battery') ||
-                  summaryQuestions.includes('reviews') ||
-                  summaryQuestions.includes('units');
+                  comprehensionQuestions.includes('price') || 
+                  comprehensionQuestions.includes('features') || 
+                  comprehensionQuestions.includes('battery') ||
+                  comprehensionQuestions.includes('reviews') ||
+                  comprehensionQuestions.includes('units');
 
                 // Check discussion questions quality
                 const discussionQuestions = result.discussionQuestions.join(' ').toLowerCase();
@@ -84,11 +84,11 @@ tests:
             value: |
                 const result = JSON.parse(output);
                 // Basic structure check
-                if (!result.summaryQuestions || !result.discussionQuestions) return false;
-                if (result.summaryQuestions.length !== 3 || result.discussionQuestions.length !== 3) return false;
+                if (!result.comprehensionQuestions || !result.discussionQuestions) return false;
+                if (result.comprehensionQuestions.length !== 3 || result.discussionQuestions.length !== 3) return false;
 
                 // Check for environmental topic coverage
-                const allQuestions = [...result.summaryQuestions, ...result.discussionQuestions].join(' ').toLowerCase();
+                const allQuestions = [...result.comprehensionQuestions, ...result.discussionQuestions].join(' ').toLowerCase();
                 const hasRelevantContent = 
                   allQuestions.includes('temperature') || 
                   allQuestions.includes('coral') || 
@@ -107,16 +107,16 @@ tests:
           - type: javascript
             value: |
                 const result = JSON.parse(output);
-                if (!result.summaryQuestions || !result.discussionQuestions) return false;
-                if (result.summaryQuestions.length !== 3 || result.discussionQuestions.length !== 3) return false;
+                if (!result.comprehensionQuestions || !result.discussionQuestions) return false;
+                if (result.comprehensionQuestions.length !== 3 || result.discussionQuestions.length !== 3) return false;
 
                 // Check comprehension questions target facts
-                const summaryQuestions = result.summaryQuestions.join(' ').toLowerCase();
+                const comprehensionQuestions = result.comprehensionQuestions.join(' ').toLowerCase();
                 const hasStatistics = 
-                  summaryQuestions.includes('percent') || 
-                  summaryQuestions.includes('%') || 
-                  summaryQuestions.includes('survey') ||
-                  summaryQuestions.includes('study');
+                  comprehensionQuestions.includes('percent') || 
+                  comprehensionQuestions.includes('%') || 
+                  comprehensionQuestions.includes('survey') ||
+                  comprehensionQuestions.includes('study');
 
                 // Check discussion questions are personal
                 const discussionQuestions = result.discussionQuestions.join(' ').toLowerCase();
@@ -134,14 +134,14 @@ tests:
           - type: is-json
           - type: contains-all
             value:
-                - summaryQuestions
+                - comprehensionQuestions
                 - discussionQuestions
           - type: javascript
             value: |
                 const result = JSON.parse(output);
                 // Verify all questions are present and non-empty
                 const allQuestionsPresent = 
-                  result.summaryQuestions.every(q => q && q.length > 10) &&
+                  result.comprehensionQuestions.every(q => q && q.length > 10) &&
                   result.discussionQuestions.every(q => q && q.length > 10);
 
                 return allQuestionsPresent;
@@ -157,7 +157,7 @@ tests:
                 const result = JSON.parse(output);
 
                 // Check question differentiation
-                const summaryQs = result.summaryQuestions.join(' ');
+                const summaryQs = result.comprehensionQuestions.join(' ');
                 const discussionQs = result.discussionQuestions.join(' ');
 
                 // Summary questions should focus on facts
@@ -170,7 +170,7 @@ tests:
 
                 // Discussion questions should be different from summary
                 const questionsAreDifferent = 
-                  result.summaryQuestions[0] !== result.discussionQuestions[0];
+                  result.comprehensionQuestions[0] !== result.discussionQuestions[0];
 
                 return summaryHasFacts && questionsAreDifferent;
 
@@ -184,7 +184,7 @@ tests:
             value: |
                 const result = JSON.parse(output);
                 // Should still generate 6 questions even with limited content
-                return result.summaryQuestions.length === 3 && result.discussionQuestions.length === 3;
+                return result.comprehensionQuestions.length === 3 && result.discussionQuestions.length === 3;
 
     - description: Test with technical/scientific article
       vars:
@@ -197,7 +197,7 @@ tests:
                 const result = JSON.parse(output);
 
                 // Check that complex content still generates accessible questions
-                const allQuestions = [...result.summaryQuestions, ...result.discussionQuestions];
+                const allQuestions = [...result.comprehensionQuestions, ...result.discussionQuestions];
 
                 // At least some questions should be understandable for ESL students
                 const hasAccessibleLanguage = allQuestions.some(q => 

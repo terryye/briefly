@@ -64,7 +64,7 @@ function flattenQuestions(questionGroup: QuestionsGroup, articleId: string) {
             seq,
             type,
         }));
-    const q1 = _flatten(questionGroup.summaryQuestions, 1);
+    const q1 = _flatten(questionGroup.comprehensionQuestions, 1);
     const q2 = _flatten(questionGroup.discussionQuestions, 2);
     return [...q1, ...q2];
 }

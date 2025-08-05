@@ -33,7 +33,7 @@ export default createTRPCRouter({
                     )
                 );
             if (sumup.length > 0) {
-                return sumup[0];
+                return sumup[0].message;
             } else {
                 //get all data
                 const article = await getArticleById(articleId);
@@ -76,7 +76,14 @@ export default createTRPCRouter({
                     answers,
                     feedbacks
                 );
-                return response.toString();
+                await db.insert(t_sumup).values({
+                    articleId: articleId,
+                    userId: userId,
+                    message: response.toString(),
+                    type: 1,
+                });
+
+                return response.toString() as string;
             }
         }),
 });

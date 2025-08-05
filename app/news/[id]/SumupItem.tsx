@@ -17,6 +17,7 @@
 
 import Loading from "@/app/components/ui/Loading";
 import { api } from "@/trpc/react";
+import ReactMarkdown from "react-markdown";
 
 const SumupItem = ({ articleId }: { articleId: string }) => {
     const { data: sumup, isLoading: isSumupLoading } = api.summup.view.useQuery(
@@ -27,7 +28,7 @@ const SumupItem = ({ articleId }: { articleId: string }) => {
     if (isSumupLoading) {
         return <Loading />;
     }
-    return <div className="whitespace-pre-wrap">{"" + sumup}</div>;
+    return <ReactMarkdown>{sumup}</ReactMarkdown>;
 };
 
 export default SumupItem;
